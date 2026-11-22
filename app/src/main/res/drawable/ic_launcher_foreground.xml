@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Simple question-mark glyph for the Quizzer launcher icon -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M54,32c-7.7,0 -14,5.4 -14,12h7c0,-2.8 3.1,-5 7,-5s7,2.2 7,5c0,2.4 -1.6,3.6 -4.4,5.4C53.3,51.5 50.5,53.6 50.5,58.5V61h7v-2c0,-2.4 1.6,-3.6 4.4,-5.4C64.7,51.5 68,49.1 68,44C68,37.4 61.7,32 54,32zM50.5,66h7v7h-7z" />
+</vector>
