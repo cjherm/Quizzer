@@ -2,7 +2,32 @@
 How can I easily learn new things while commuting?
 
 Quizzer is a simple Android quiz app (Kotlin + Jetpack Compose). Questions are not hardcoded:
-each topic is a JSON file that can be imported into the app.
+each topic is a JSON file that can be imported into the app. Games of 16 questions, multiple
+correct answers per question, a learning history that brings back what you got wrong, and
+four selectable themes.
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/images/sunset-coast-topics.png" width="240" alt="Topic list in the Sunset Coast theme"></td>
+    <td align="center"><img src="docs/images/neon-night-quiz.png" width="240" alt="Quiz question in the Neon Night theme, partially correct"></td>
+    <td align="center"><img src="docs/images/neon-night-result.png" width="240" alt="Result screen with pie chart in the Neon Night theme"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Topics · Sunset Coast</sub></td>
+    <td align="center"><sub>Quiz · Neon Night</sub></td>
+    <td align="center"><sub>Result · Neon Night</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/images/postcard-quiz.png" width="240" alt="Quiz question in the Postcard theme, wrong answer"></td>
+    <td align="center"><img src="docs/images/pocket-phone-topics.png" width="240" alt="Topic list in the Pocket Phone theme"></td>
+    <td align="center"><img src="docs/images/theme-picker.png" width="240" alt="Theme picker with previews of all four themes"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Quiz · Postcard</sub></td>
+    <td align="center"><sub>Topics · Pocket Phone</sub></td>
+    <td align="center"><sub>Theme picker</sub></td>
+  </tr>
+</table>
 
 ## Topic file format
 
