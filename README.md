@@ -141,7 +141,7 @@ Requirements:
 | `app/src/main/res/values/labels.xml` | Random button labels |
 | `app/src/main/java/com/quizzer/app/` | `data/` topics and statistics, `quiz/` game logic, `theme/` theme engine, `ui/` screens, `appicon/` icon switching |
 | `docs/PLAN.md` | Plan, decisions and open items |
-| `docs/design/` | Design handoffs for themes and app icons |
+| `docs/design/` | Design handoffs (specs) for the themes |
 
 ## License
 

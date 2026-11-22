@@ -82,7 +82,7 @@ Dalej!, Další!, Tovább!, Дальше!, Devam!, 次へ!, 다음!, Lanjut!
 ## Themes ✅
 
 - Four themes from Claude Design, built in: Sunset Coast (default), Neon Night, Postcard, Pocket Phone.
-  Design handoff per theme (spec, theme JSON, 22 reference screens): `docs/design/themes/<id>/`.
+  Design handoff per theme (spec): `docs/design/themes/<id>/handoff.md`; theme files: `app/src/main/assets/themes/`.
 - The palette button on the topic list opens the theme picker; the choice is remembered.
 - A theme is a JSON file (schema v1) with colors, gradients, surfaces, shapes, text styles and decor.
   All screens read these tokens; the layout is the same for every theme.
@@ -97,7 +97,7 @@ Dalej!, Další!, Tovább!, Дальше!, Devam!, 次へ!, 다음!, Lanjut!
 
 ## App icon ✅
 
-- Default: icon 2a "Sunset Q"; alternatives 2b "Answers", 2c "Neon Q", 2h "Badge" (`docs/design/icons/`).
+- Default: icon 2a "Sunset Q"; alternatives 2b "Answers", 2c "Neon Q", 2h "Badge" (`app/src/main/res/drawable/ic_launcher_*`).
 - Selectable in the theme picker. One activity-alias per icon in the manifest, exactly one enabled.
   The choice is applied in `MainActivity.onStop()`, since disabling the alias the app was started
   from closes it.

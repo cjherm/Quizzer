@@ -1,43 +1,40 @@
-# Compiled class file
+# Gradle and build output
+.gradle/
+.kotlin/
+build/
+captures/
+.cxx/
+
+# Machine-specific settings
+local.properties
+.idea/
+*.iml
+
+# Build artifacts
+*.apk
+*.aab
 *.class
-
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
 *.jar
-*.war
-*.nar
-*.ear
+# The Gradle wrapper jar must be committed (the *.jar rule above would exclude it)
+!gradle/wrapper/gradle-wrapper.jar
+
+# Signing keys: never commit these
+*.jks
+*.keystore
+
+# Logs and crash dumps
+*.log
+hs_err_pid*
+replay_pid*
+
+# Archives (e.g. design exports; unpack what's needed into docs/)
 *.zip
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
-
-# Kotlin Gradle plugin data, see https://kotlinlang.org/docs/whatsnew20.html#new-directory-for-kotlin-data-in-gradle-projects
-.kotlin/
-
-# Android / Gradle
-.gradle/
-build/
-local.properties
-.idea/
-.kotlin/
-*.apk
-captures/
-.cxx/
-
-# The Gradle wrapper jar must be committed (the *.jar rule above would exclude it)
-!gradle/wrapper/gradle-wrapper.jar
+# OS files
+.DS_Store
+Thumbs.db
 
 # Design reference screenshots (kept locally, too large for the repo)
 docs/design/**/screens/
