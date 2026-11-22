@@ -31,6 +31,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.quizzer.app.appicon.AppIcons
 import com.quizzer.app.quiz.QuizViewModel
 import com.quizzer.app.theme.ProvideQuizTheme
 import com.quizzer.app.theme.QuizTheme
@@ -45,6 +46,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent { QuizzerApp() }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        // Switch the launcher icon only while the app isn't visible (see AppIcons).
+        if (!isChangingConfigurations) AppIcons.applyChosen(this)
     }
 }
 
@@ -112,6 +119,8 @@ fun QuizzerApp(viewModel: QuizViewModel = viewModel()) {
                         Screen.Themes -> ThemePickerScreen(
                             themes = viewModel.themes,
                             currentId = viewModel.currentTheme?.theme?.id,
+                            appIcon = viewModel.appIcon,
+                            onSelectAppIcon = viewModel::selectAppIcon,
                             onSelect = { viewModel.selectTheme(it.theme.id) },
                             onDelete = viewModel::deleteTheme,
                             onImport = { themeImport.launch(arrayOf("*/*")) },

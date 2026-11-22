@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Quizzer icon 2a – monochrome layer (Android 13+ themed icons) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+  <group android:translateX="18" android:translateY="18" android:scaleX="0.72" android:scaleY="0.72">
+    <path android:pathData="M60.16,68.57 L55.55,74.92 L47.96,69.35 Q46.44,69.75 44.9,69.75 L44.9,69.75 Q38.66,69.75 35.96,66.05 Q33.27,62.36 34.39,55.28 L34.39,55.28 L38.47,29.51 Q39.56,22.64 43.5,19.07 Q47.44,15.5 53.83,15.5 L53.83,15.5 Q60.21,15.5 63.02,19.07 Q65.83,22.64 64.74,29.51 L64.74,29.51 L60.66,55.28 Q59.62,61.88 56.05,65.66 L56.05,65.66 L60.16,68.57 Z M46.79,59.94 L46.79,59.94 Q47.94,59.94 48.57,59.09 Q49.21,58.24 49.54,57 Q49.87,55.76 50.05,54.61 L50.05,54.61 L54,29.69 Q54.27,28 54.01,26.65 Q53.76,25.31 52.21,25.31 L52.21,25.31 Q50.64,25.31 49.95,26.62 Q49.25,27.94 48.98,29.66 L48.98,29.66 L44.99,54.82 Q44.83,55.88 44.77,57.08 Q44.72,58.27 45.13,59.11 Q45.55,59.94 46.79,59.94 Z" android:fillColor="#FFFFFFFF"/>
+  </group>
+</vector>

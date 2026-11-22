@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Quizzer icon 2h – background layer -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+  <group android:translateX="18" android:translateY="18" android:scaleX="0.72" android:scaleY="0.72">
+    <path android:pathData="M-25,-25 L125,-25 L125,125 L-25,125 Z">
+      <aapt:attr name="android:fillColor">
+      <gradient android:type="linear" android:startX="50" android:startY="0" android:endX="50" android:endY="100">
+        <item android:offset="0" android:color="#FF1B1030"/>
+        <item android:offset="1" android:color="#FF3A1250"/>
+      </gradient>
+      </aapt:attr>
+    </path>
+    <path android:pathData="M30,40 A28,28 0 1,0 86,40 A28,28 0 1,0 30,40 Z">
+      <aapt:attr name="android:fillColor">
+      <gradient android:type="linear" android:startX="50" android:startY="12" android:endX="50" android:endY="68">
+        <item android:offset="0" android:color="#FFFFC65C"/>
+        <item android:offset="0.55" android:color="#FFFF8A3D"/>
+        <item android:offset="1" android:color="#FFC2246B"/>
+      </gradient>
+      </aapt:attr>
+    </path>
+    <path android:pathData="M-25,50 L125,50 L125,53 L-25,53 Z" android:fillColor="#FF2C1144"/>
+    <path android:pathData="M-25,57 L125,57 L125,60 L-25,60 Z" android:fillColor="#FF2C1144"/>
+    <path android:pathData="M-25,64 L125,64 L125,67 L-25,67 Z" android:fillColor="#FF2C1144"/>
+  </group>
+</vector>

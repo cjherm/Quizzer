@@ -7,6 +7,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.quizzer.app.appicon.AppIcon
+import com.quizzer.app.appicon.AppIcons
 import com.quizzer.app.data.Stats
 import com.quizzer.app.data.StatsRepository
 import com.quizzer.app.data.Topic
@@ -40,6 +42,9 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
         get() = themes.firstOrNull { it.theme.id == currentThemeId } ?: themes.firstOrNull()
 
     var showThemePicker by mutableStateOf(false)
+        private set
+
+    var appIcon by mutableStateOf(AppIcons.chosen(application))
         private set
 
     /** One-off message for the snackbar; call [messageShown] after displaying it. */
@@ -154,6 +159,13 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
                 "Import failed: ${e.message}"
             }
         }
+    }
+
+    fun selectAppIcon(icon: AppIcon) {
+        if (icon == appIcon) return
+        AppIcons.choose(getApplication(), icon)
+        appIcon = icon
+        message = "App icon \"${icon.label}\" selected. It appears after you leave Quizzer."
     }
 
     fun deleteTheme(entry: ThemeEntry) {

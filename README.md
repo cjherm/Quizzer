@@ -110,6 +110,10 @@ Tap the palette icon on the topic list to pick a theme. Four themes are built in
 `docs/design/themes/sunset-coast/handoff.md`). A theme changes colors, fonts, shapes and backgrounds;
 the layout stays the same.
 
+The **app icon** can be changed in the same screen: "Sunset Q" (default), "Answers", "Neon Q" and
+"Badge" (designs in `docs/design/icons/`). The new icon is applied when you leave the app, because
+Android closes an app whose launcher entry is switched while it's open.
+
 ## Build & run
 
 ```

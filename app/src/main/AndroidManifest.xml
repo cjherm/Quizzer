@@ -5,17 +5,70 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Quizzer">
+
+        <!-- Started only through one of the launcher aliases below. -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="false" />
+
+        <!--
+            App icons: one launcher entry per icon, exactly one is enabled at a time.
+            The app switches them in AppIcons.kt. Default: icon 2a.
+        -->
+        <activity-alias
+            android:name=".LauncherDefault"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:targetActivity=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".Launcher2B"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_2b"
+            android:roundIcon="@mipmap/ic_launcher_2b"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".Launcher2C"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_2c"
+            android:roundIcon="@mipmap/ic_launcher_2c"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
+            android:name=".Launcher2H"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_2h"
+            android:roundIcon="@mipmap/ic_launcher_2h"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
     </application>
 
 </manifest>

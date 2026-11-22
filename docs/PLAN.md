@@ -95,6 +95,15 @@ Dalej!, Další!, Tovább!, Дальше!, Devam!, 次へ!, 다음!, Lanjut!
 - Not done yet: answer-row crossfade/stagger animation, scrollbar in long questions, an in-app
   licenses screen.
 
+## App icon ✅
+
+- Default: icon 2a "Sunset Q"; alternatives 2b "Answers", 2c "Neon Q", 2h "Badge" (`docs/design/icons/`).
+- Selectable in the theme picker. One activity-alias per icon in the manifest, exactly one enabled.
+  The choice is applied in `MainActivity.onStop()`, since disabling the alias the app was started
+  from closes it.
+- Icons are built in only (launcher icons must be app resources); a new icon needs an app update.
+- Not included: 512 × 512 PNG for Google Play.
+
 ## Build order
 
 1. ✅ Game rules: IDs, 16 questions / short game, random labels, partial scoring, 75 % win rule.

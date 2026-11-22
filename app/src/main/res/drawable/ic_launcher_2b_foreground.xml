@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Quizzer icon 2b – foreground layer -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+  <group android:translateX="18" android:translateY="18" android:scaleX="0.72" android:scaleY="0.72">
+    <path android:pathData="M21,24 L76,24 L71,37 L16,37 Z" android:fillColor="#E6FFFFFF"/>
+    <path android:pathData="M18,43 L90,43 L84,58 L12,58 Z" android:fillColor="#FFC2246B"/>
+    <path android:pathData="M68.72,51.19 L71.13,53.59 L76.63,48.09" android:strokeColor="#FFFFFFFF" android:strokeWidth="1.6" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000"/>
+    <path android:pathData="M21,64 L66,64 L61,77 L16,77 Z" android:fillColor="#8CB3A4C4"/>
+  </group>
+</vector>
