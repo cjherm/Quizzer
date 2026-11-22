@@ -114,6 +114,25 @@ The **app icon** can be changed in the same screen: "Sunset Q" (default), "Answe
 "Badge" (designs in `docs/design/icons/`). The new icon is applied when you leave the app, because
 Android closes an app whose launcher entry is switched while it's open.
 
+## License
+
+Quizzer is licensed under the [GNU General Public License v3.0](LICENSE).
+
+### Third-party licenses
+
+The following files are **not** covered by the GPL; they keep their own licenses. The full texts
+are in [`app/src/main/assets/licenses/`](app/src/main/assets/licenses/) and are shown in the app
+(theme picker → Licenses).
+
+| Component | Files | License |
+|---|---|---|
+| Anton (The Anton Project Authors) | `app/src/main/res/font/anton_regular.ttf` | SIL Open Font License 1.1 |
+| Inter (The Inter Project Authors) | `app/src/main/res/font/inter_variable.ttf` | SIL Open Font License 1.1 |
+| Oswald (The Oswald Project Authors) | `app/src/main/res/font/oswald_variable.ttf` | SIL Open Font License 1.1 |
+| Shrikhand (Jonny Pinhorn) | `app/src/main/res/font/shrikhand_regular.ttf` | SIL Open Font License 1.1 |
+| Phosphor Icons | `app/src/main/res/drawable/ic_{palette,trash,x,arrow_left,check}.xml` | MIT |
+| AndroidX, Jetpack Compose, Kotlin, kotlinx.coroutines | Gradle dependencies | Apache License 2.0 |
+
 ## Build & run
 
 ```

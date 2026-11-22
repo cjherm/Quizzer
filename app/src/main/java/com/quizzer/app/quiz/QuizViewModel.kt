@@ -43,6 +43,8 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
 
     var showThemePicker by mutableStateOf(false)
         private set
+    var showLicenses by mutableStateOf(false)
+        private set
 
     var appIcon by mutableStateOf(AppIcons.chosen(application))
         private set
@@ -141,6 +143,15 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
 
     fun closeThemePicker() {
         showThemePicker = false
+        showLicenses = false
+    }
+
+    fun openLicenses() {
+        showLicenses = true
+    }
+
+    fun closeLicenses() {
+        showLicenses = false
     }
 
     fun selectTheme(id: String) {

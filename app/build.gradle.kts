@@ -30,6 +30,32 @@ android {
     }
 }
 
+/** Copies the repository's LICENSE into the app's assets, so the licenses screen can show it. */
+abstract class CopyAppLicenseTask : DefaultTask() {
+    @get:InputFile
+    @get:PathSensitive(PathSensitivity.NONE)
+    abstract val licenseFile: RegularFileProperty
+
+    @get:OutputDirectory
+    abstract val outputDir: DirectoryProperty
+
+    @TaskAction
+    fun copy() {
+        val dir = outputDir.get().asFile.resolve("licenses").apply { mkdirs() }
+        licenseFile.get().asFile.copyTo(dir.resolve("quizzer-GPL-3.0.txt"), overwrite = true)
+    }
+}
+
+val copyAppLicense = tasks.register<CopyAppLicenseTask>("copyAppLicense") {
+    licenseFile.set(rootProject.layout.projectDirectory.file("LICENSE"))
+}
+
+androidComponents {
+    onVariants { variant ->
+        variant.sources.assets?.addGeneratedSourceDirectory(copyAppLicense, CopyAppLicenseTask::outputDir)
+    }
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)

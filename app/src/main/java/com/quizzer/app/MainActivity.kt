@@ -35,6 +35,7 @@ import com.quizzer.app.appicon.AppIcons
 import com.quizzer.app.quiz.QuizViewModel
 import com.quizzer.app.theme.ProvideQuizTheme
 import com.quizzer.app.theme.QuizTheme
+import com.quizzer.app.ui.LicensesScreen
 import com.quizzer.app.ui.QuizScreen
 import com.quizzer.app.ui.ResultScreen
 import com.quizzer.app.ui.ThemePickerScreen
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
 }
 
 /** Screens in navigation order; a higher rank slides in from the right. */
-private enum class Screen(val rank: Int) { Topics(0), Themes(1), Quiz(1), Result(2) }
+private enum class Screen(val rank: Int) { Topics(0), Themes(1), Licenses(2), Quiz(1), Result(2) }
 
 @Composable
 fun QuizzerApp(viewModel: QuizViewModel = viewModel()) {
@@ -82,12 +83,14 @@ fun QuizzerApp(viewModel: QuizViewModel = viewModel()) {
     val screen = when {
         session?.isFinished == true -> Screen.Result
         session != null -> Screen.Quiz
+        viewModel.showThemePicker && viewModel.showLicenses -> Screen.Licenses
         viewModel.showThemePicker -> Screen.Themes
         else -> Screen.Topics
     }
     when (screen) {
         Screen.Quiz, Screen.Result -> BackHandler(onBack = viewModel::exitQuiz)
         Screen.Themes -> BackHandler(onBack = viewModel::closeThemePicker)
+        Screen.Licenses -> BackHandler(onBack = viewModel::closeLicenses)
         Screen.Topics -> Unit
     }
 
@@ -121,11 +124,13 @@ fun QuizzerApp(viewModel: QuizViewModel = viewModel()) {
                             currentId = viewModel.currentTheme?.theme?.id,
                             appIcon = viewModel.appIcon,
                             onSelectAppIcon = viewModel::selectAppIcon,
+                            onOpenLicenses = viewModel::openLicenses,
                             onSelect = { viewModel.selectTheme(it.theme.id) },
                             onDelete = viewModel::deleteTheme,
                             onImport = { themeImport.launch(arrayOf("*/*")) },
                             onBack = viewModel::closeThemePicker,
                         )
+                        Screen.Licenses -> LicensesScreen(onBack = viewModel::closeLicenses)
                         // The session may already be gone while this screen animates out.
                         Screen.Quiz -> if (s != null && !s.isFinished) QuizScreen(
                             session = s,

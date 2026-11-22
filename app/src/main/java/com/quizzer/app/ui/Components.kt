@@ -171,9 +171,9 @@ fun PressableRow(
     }
 }
 
-/** "+ Import …" row at the end of a list. */
+/** "+ Import …" row at the end of a list (or another action row with a different [symbol]). */
 @Composable
-fun ImportRow(label: String, onClick: () -> Unit) {
+fun ImportRow(label: String, onClick: () -> Unit, symbol: String = "+") {
     Row(
         Modifier
             .fillMaxWidth()
@@ -182,7 +182,7 @@ fun ImportRow(label: String, onClick: () -> Unit) {
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        ThemedText("+", TextId.ImportAction, Modifier.width(20.dp))
+        ThemedText(symbol, TextId.ImportAction, Modifier.width(20.dp))
         ThemedText(label, TextId.ImportAction)
     }
 }

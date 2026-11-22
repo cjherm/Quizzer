@@ -50,6 +50,7 @@ fun ThemePickerScreen(
     currentId: String?,
     appIcon: AppIcon,
     onSelectAppIcon: (AppIcon) -> Unit,
+    onOpenLicenses: () -> Unit,
     onSelect: (ThemeEntry) -> Unit,
     onDelete: (ThemeEntry) -> Unit,
     onImport: () -> Unit,
@@ -80,6 +81,7 @@ fun ThemePickerScreen(
                 }
                 item { ImportRow("Import theme", onImport) }
                 item { AppIconSection(appIcon, onSelectAppIcon) }
+                item { ImportRow("Licenses", onOpenLicenses, symbol = "§") }
             }
         }
 
