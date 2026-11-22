@@ -2,18 +2,20 @@ package com.quizzer.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.quizzer.app.quiz.QuizViewModel
+import com.quizzer.app.ui.QuizScreen
+import com.quizzer.app.ui.ResultScreen
+import com.quizzer.app.ui.TopicListScreen
 import com.quizzer.app.ui.theme.QuizzerTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,25 +24,54 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             QuizzerTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HelloWorld(modifier = Modifier.padding(innerPadding))
-                }
+                QuizzerApp()
             }
         }
     }
 }
 
 @Composable
-fun HelloWorld(modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Hello World", style = MaterialTheme.typography.headlineMedium)
-    }
-}
+fun QuizzerApp(viewModel: QuizViewModel = viewModel()) {
+    val snackbarHostState = remember { SnackbarHostState() }
 
-@Preview(showBackground = true)
-@Composable
-fun HelloWorldPreview() {
-    QuizzerTheme {
-        HelloWorld()
+    // Any file type is allowed: many file managers don't label .json files correctly.
+    // The content is validated on import anyway.
+    val importLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (uri != null) viewModel.importTopic(uri)
+    }
+
+    LaunchedEffect(viewModel.message) {
+        viewModel.message?.let {
+            snackbarHostState.showSnackbar(it)
+            viewModel.messageShown()
+        }
+    }
+
+    val session = viewModel.session
+    when {
+        session == null -> TopicListScreen(
+            topics = viewModel.topics,
+            isLoading = viewModel.isLoading,
+            snackbarHostState = snackbarHostState,
+            onStartQuiz = viewModel::startQuiz,
+            onDeleteTopic = viewModel::deleteTopic,
+            onImportTopic = { importLauncher.launch(arrayOf("*/*")) },
+        )
+
+        session.isFinished -> {
+            BackHandler(onBack = viewModel::exitQuiz)
+            ResultScreen(session, onRetry = viewModel::restartQuiz, onBackToTopics = viewModel::exitQuiz)
+        }
+
+        else -> {
+            BackHandler(onBack = viewModel::exitQuiz)
+            QuizScreen(
+                session = session,
+                onToggleAnswer = viewModel::toggleAnswer,
+                onCheck = viewModel::checkAnswer,
+                onNext = viewModel::nextQuestion,
+                onQuit = viewModel::exitQuiz,
+            )
+        }
     }
 }

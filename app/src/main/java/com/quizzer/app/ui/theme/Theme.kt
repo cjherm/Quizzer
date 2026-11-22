@@ -8,7 +8,14 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+
+/** Colors Material 3 doesn't provide out of the box. */
+object QuizColors {
+    val correctContainer: Color
+        @Composable get() = if (isSystemInDarkTheme()) Color(0xFF1E4D2B) else Color(0xFFC8E6C9)
+}
 
 @Composable
 fun QuizzerTheme(

@@ -1,0 +1,31 @@
+{
+  "title": "Kotlin Basics (Demo)",
+  "description": "Sample file for testing the import function.",
+  "questions": [
+    {
+      "question": "Which keyword declares a read-only variable in Kotlin?",
+      "answers": [
+        { "text": "val", "correct": true },
+        { "text": "var", "correct": false },
+        { "text": "const var", "correct": false }
+      ]
+    },
+    {
+      "question": "Which of these are Kotlin collection types?",
+      "answers": [
+        { "text": "List", "correct": true },
+        { "text": "Map", "correct": true },
+        { "text": "Set", "correct": true },
+        { "text": "Bag", "correct": false }
+      ]
+    },
+    {
+      "question": "Kotlin types are non-nullable by default.",
+      "answers": [
+        { "text": "True", "correct": true },
+        { "text": "False", "correct": false }
+      ],
+      "explanation": "Add a ? to a type (e.g. String?) to allow null."
+    }
+  ]
+}

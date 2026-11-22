@@ -1,0 +1,39 @@
+{
+  "title": "ASPICE (Demo)",
+  "description": "Placeholder questions about Automotive SPICE.",
+  "questions": [
+    {
+      "question": "What does the abbreviation SPICE stand for?",
+      "answers": [
+        { "text": "Software Process Improvement and Capability dEtermination", "correct": true },
+        { "text": "Standard Process for Integrated Car Electronics", "correct": false },
+        { "text": "Safety Process In Car Engineering", "correct": false }
+      ]
+    },
+    {
+      "question": "Which of these are capability levels in ASPICE?",
+      "answers": [
+        { "text": "Level 0 – Incomplete", "correct": true },
+        { "text": "Level 1 – Performed", "correct": true },
+        { "text": "Level 2 – Managed", "correct": true },
+        { "text": "Level 7 – Perfect", "correct": false }
+      ],
+      "explanation": "ASPICE defines capability levels 0 to 5."
+    },
+    {
+      "question": "Which process group does SWE.1 belong to?",
+      "answers": [
+        { "text": "Software Engineering", "correct": true },
+        { "text": "System Engineering", "correct": false }
+      ]
+    },
+    {
+      "question": "Dummy question: which answers are marked correct?",
+      "answers": [
+        { "text": "This one", "correct": true },
+        { "text": "Not this one", "correct": false },
+        { "text": "This one too", "correct": true }
+      ]
+    }
+  ]
+}
