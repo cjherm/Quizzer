@@ -35,14 +35,32 @@ One file per topic. Each question has 2–4 answers; one, several, or all of the
 | `answers[].correct` | no | Defaults to `false`. |
 | `questions[].explanation` | no | |
 
-A question counts as correct only if exactly the correct answers are selected.
-Questions and answers are shuffled every time a quiz starts.
+### IDs
+
+Files contain no IDs. The app generates a **topic ID** from the title's initials
+(`"Android Automotive Knowledge"` → `aak`; one-word titles use the word, e.g. `aspice`) and
+**question IDs** from the position in the file (`aak-0`, `aak-1`, …). The learning history is
+stored per question ID, so **only append new questions at the end** of a file – inserting,
+deleting or reordering shifts the IDs. Fixing the wording of a question is fine.
+
+## Game rules
+
+- A game has 16 questions, picked at random; questions answered wrong before come up more often.
+  Topics with fewer questions give a short game with all of them.
+- **Correct:** exactly the correct answers selected. **Partially correct:** at least one correct
+  answer selected, but not exactly the right set. **Wrong:** no correct answer selected.
+- You win with at least 75 % correct (rounded up: 12 of 16). Partially correct doesn't count.
+- Answers are shuffled for every question. The buttons show random labels ("Fire!", "¡Vamos!", …),
+  defined in `app/src/main/res/values/labels.xml`.
+
+See `docs/PLAN.md` for the plan and what's still open.
 
 ## Topics in the app
 
-- Two demo topics (`app/src/main/assets/topics/`) are installed on first launch.
+- Three demo topics (`app/src/main/assets/topics/`) are installed on first launch.
 - **Import topic** opens the system file picker; the file is validated and copied into the app.
-- Topics can be deleted from the topic list.
+- Topics can be deleted from the topic list; this also deletes their statistics.
+- Wins / games per topic are shown in the topic list.
 - `sample-topics/` contains an extra file for testing the import, e.g.:
   `adb push sample-topics/kotlin_basics_demo.json /sdcard/Download/`
 

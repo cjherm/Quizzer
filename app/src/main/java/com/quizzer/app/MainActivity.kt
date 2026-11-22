@@ -51,6 +51,7 @@ fun QuizzerApp(viewModel: QuizViewModel = viewModel()) {
     when {
         session == null -> TopicListScreen(
             topics = viewModel.topics,
+            topicStats = viewModel.stats.topics,
             isLoading = viewModel.isLoading,
             snackbarHostState = snackbarHostState,
             onStartQuiz = viewModel::startQuiz,

@@ -19,15 +19,19 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.quizzer.app.data.Answer
 import com.quizzer.app.data.Question
+import com.quizzer.app.data.QuestionResult
 import com.quizzer.app.data.Topic
+import com.quizzer.app.R
 import com.quizzer.app.quiz.QuizSession
 import com.quizzer.app.ui.theme.QuizColors
 import com.quizzer.app.ui.theme.QuizzerTheme
@@ -83,8 +87,8 @@ fun QuizScreen(
                 }
             }
 
-            if (session.isChecked) {
-                Feedback(isCorrect = session.isCurrentAnswerCorrect, explanation = question.explanation)
+            session.currentResult?.let { result ->
+                Feedback(result = result, explanation = question.explanation)
             }
 
             Button(
@@ -92,14 +96,23 @@ fun QuizScreen(
                 enabled = session.isChecked || session.selected.isNotEmpty(),
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Text(
-                    when {
-                        !session.isChecked -> "Check answer"
-                        session.isLastQuestion -> "Show result"
-                        else -> "Next question"
-                    },
-                )
+                Text(actionLabel(session))
             }
+        }
+    }
+}
+
+/** Random label per question and state; kept across recompositions and rotation. */
+@Composable
+private fun actionLabel(session: QuizSession): String {
+    val submitLabels = stringArrayResource(R.array.submit_labels)
+    val nextLabels = stringArrayResource(R.array.next_labels)
+    val showScore = stringResource(R.string.show_score_label)
+    return rememberSaveable(session.topic.id, session.currentIndex, session.isChecked) {
+        when {
+            !session.isChecked -> submitLabels.random()
+            session.isLastQuestion -> showScore
+            else -> nextLabels.random()
         }
     }
 }
@@ -138,14 +151,15 @@ private fun AnswerOption(answer: Answer, isSelected: Boolean, isChecked: Boolean
 }
 
 @Composable
-private fun Feedback(isCorrect: Boolean, explanation: String?) {
-    val color: Color = if (isCorrect) QuizColors.correctContainer else MaterialTheme.colorScheme.errorContainer
+private fun Feedback(result: QuestionResult, explanation: String?) {
+    val (color, title) = when (result) {
+        QuestionResult.CORRECT -> QuizColors.correctContainer to "Correct!"
+        QuestionResult.PARTIAL -> QuizColors.partialContainer to "Partially correct. All correct answers are marked with ✓."
+        QuestionResult.WRONG -> MaterialTheme.colorScheme.errorContainer to "Not quite. The correct answers are marked with ✓."
+    }
     Surface(color = color, shape = MaterialTheme.shapes.medium, modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(
-                if (isCorrect) "Correct!" else "Not quite. The correct answers are marked with ✓.",
-                style = MaterialTheme.typography.titleMedium,
-            )
+            Text(title, style = MaterialTheme.typography.titleMedium)
             if (explanation != null) {
                 Text(explanation, style = MaterialTheme.typography.bodyMedium)
             }
@@ -160,6 +174,7 @@ private fun QuizScreenPreview() {
         "demo.json", "Demo", "",
         listOf(
             Question(
+                "demo-0",
                 "Which of these are fruits?",
                 listOf(Answer("Apple", true), Answer("Carrot", false), Answer("Banana", true)),
                 "Apples and bananas are fruits; carrots are root vegetables.",

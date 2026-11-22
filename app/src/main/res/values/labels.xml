@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Button labels in the quiz. One is picked at random per question; repeats are allowed.
+    Non-breaking spaces ( ) keep the French "!" on the same line as its word.
+-->
+<resources>
+    <!-- Shown before the answer is checked. -->
+    <string-array name="submit_labels">
+        <item>Go!</item>
+        <item>Fire!</item>
+        <item>Check!</item>
+        <item>Submit!</item>
+        <item>Lock it in!</item>
+        <item>Final answer!</item>
+        <item>Send it!</item>
+        <item>Engage!</item>
+        <item>Launch!</item>
+        <item>Let\'s go!</item>
+        <item>Los!</item>
+        <item>Feuer!</item>
+        <item>Ab geht\'s!</item>
+        <item>Allez !</item>
+        <item>C\'est parti !</item>
+        <item>Feu !</item>
+        <item>¡Vamos!</item>
+        <item>¡Fuego!</item>
+        <item>¡Dale!</item>
+        <item>Andiamo!</item>
+        <item>Fuoco!</item>
+        <item>Vamos lá!</item>
+        <item>Vooruit!</item>
+        <item>Kör!</item>
+        <item>Hajrá!</item>
+        <item>Naprzód!</item>
+        <item>Давай!</item>
+        <item>İleri!</item>
+        <item>Yalla!</item>
+        <item>行くぞ!</item>
+        <item>가자!</item>
+        <item>Ayo!</item>
+    </string-array>
+
+    <!-- Shown after the answer is checked, to go to the next question. -->
+    <string-array name="next_labels">
+        <item>Next!</item>
+        <item>Onward!</item>
+        <item>Moving on!</item>
+        <item>Bring it on!</item>
+        <item>Keep going!</item>
+        <item>Another one!</item>
+        <item>Hit me!</item>
+        <item>Next up!</item>
+        <item>Continue!</item>
+        <item>Carry on!</item>
+        <item>Weiter!</item>
+        <item>Weiter geht\'s!</item>
+        <item>Nächste!</item>
+        <item>Suivant !</item>
+        <item>En avant !</item>
+        <item>On continue !</item>
+        <item>¡Siguiente!</item>
+        <item>¡Adelante!</item>
+        <item>¡Otra!</item>
+        <item>Avanti!</item>
+        <item>Prossima!</item>
+        <item>Próxima!</item>
+        <item>Verder!</item>
+        <item>Nästa!</item>
+        <item>Dalej!</item>
+        <item>Další!</item>
+        <item>Tovább!</item>
+        <item>Дальше!</item>
+        <item>Devam!</item>
+        <item>次へ!</item>
+        <item>다음!</item>
+        <item>Lanjut!</item>
+    </string-array>
+
+    <!-- Shown after the last question is checked. -->
+    <string name="show_score_label">Show my score!</string>
+</resources>

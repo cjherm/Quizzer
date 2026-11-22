@@ -35,12 +35,14 @@ import androidx.compose.ui.unit.dp
 import com.quizzer.app.data.Answer
 import com.quizzer.app.data.Question
 import com.quizzer.app.data.Topic
+import com.quizzer.app.data.TopicStats
 import com.quizzer.app.ui.theme.QuizzerTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopicListScreen(
     topics: List<Topic>,
+    topicStats: Map<String, TopicStats>,
     isLoading: Boolean,
     snackbarHostState: SnackbarHostState,
     onStartQuiz: (Topic) -> Unit,
@@ -78,6 +80,7 @@ fun TopicListScreen(
                 items(topics, key = { it.id }) { topic ->
                     TopicCard(
                         topic = topic,
+                        stats = topicStats[topic.id],
                         onClick = { onStartQuiz(topic) },
                         onDelete = { topicToDelete = topic },
                     )
@@ -105,7 +108,7 @@ fun TopicListScreen(
 }
 
 @Composable
-private fun TopicCard(topic: Topic, onClick: () -> Unit, onDelete: () -> Unit) {
+private fun TopicCard(topic: Topic, stats: TopicStats?, onClick: () -> Unit, onDelete: () -> Unit) {
     Card(onClick = onClick, modifier = Modifier.fillMaxWidth()) {
         Row(Modifier.padding(start = 16.dp, top = 16.dp, bottom = 16.dp, end = 4.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -118,7 +121,14 @@ private fun TopicCard(topic: Topic, onClick: () -> Unit, onDelete: () -> Unit) {
                     )
                 }
                 Text(
-                    "${topic.questions.size} questions",
+                    buildString {
+                        append("${topic.questions.size} questions")
+                        if (stats != null && stats.gamesPlayed > 0) {
+                            val wins = if (stats.gamesWon == 1) "win" else "wins"
+                            val games = if (stats.gamesPlayed == 1) "game" else "games"
+                            append(" · ${stats.gamesWon} $wins / ${stats.gamesPlayed} $games")
+                        }
+                    },
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.primary,
                 )
@@ -131,13 +141,14 @@ private fun TopicCard(topic: Topic, onClick: () -> Unit, onDelete: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 private fun TopicListPreview() {
-    val q = Question("Q?", listOf(Answer("A", true), Answer("B", false)))
+    val q = Question("a-0", "Q?", listOf(Answer("A", true), Answer("B", false)))
     QuizzerTheme {
         TopicListScreen(
             topics = listOf(
-                Topic("a.json", "ASPICE (Demo)", "Automotive SPICE basics", listOf(q, q, q)),
-                Topic("b.json", "General Knowledge (Demo)", "", listOf(q)),
+                Topic("a", "ASPICE (Demo)", "Automotive SPICE basics", listOf(q, q, q)),
+                Topic("b", "General Knowledge (Demo)", "", listOf(q)),
             ),
+            topicStats = mapOf("a" to TopicStats(gamesPlayed = 8, gamesWon = 5)),
             isLoading = false,
             snackbarHostState = remember { SnackbarHostState() },
             onStartQuiz = {}, onDeleteTopic = {}, onImportTopic = {},

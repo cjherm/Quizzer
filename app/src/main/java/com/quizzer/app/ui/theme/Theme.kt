@@ -15,6 +15,8 @@ import androidx.compose.ui.platform.LocalContext
 object QuizColors {
     val correctContainer: Color
         @Composable get() = if (isSystemInDarkTheme()) Color(0xFF1E4D2B) else Color(0xFFC8E6C9)
+    val partialContainer: Color
+        @Composable get() = if (isSystemInDarkTheme()) Color(0xFF5C3B00) else Color(0xFFFFE0B2)
 }
 
 @Composable

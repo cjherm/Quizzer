@@ -14,7 +14,8 @@ object TopicParser {
     const val MIN_ANSWERS = 2
     const val MAX_ANSWERS = 4
 
-    fun parse(json: String, id: String): Topic {
+    /** Parses [json]; question IDs are derived from [topicId]. */
+    fun parse(json: String, topicId: String): Topic {
         val root = try {
             JSONObject(json)
         } catch (e: JSONException) {
@@ -27,11 +28,13 @@ object TopicParser {
             ?: throw IllegalArgumentException("Topic is missing the \"questions\" list")
         require(questionsJson.length() > 0) { "Topic has no questions" }
 
-        val questions = questionsJson.objects("Question").mapIndexed { i, q -> parseQuestion(q, i + 1) }
-        return Topic(id = id, title = title, description = description, questions = questions)
+        val questions = questionsJson.objects("Question").mapIndexed { i, q ->
+            parseQuestion(q, number = i + 1, id = Topic.questionId(topicId, i))
+        }
+        return Topic(id = topicId, title = title, description = description, questions = questions)
     }
 
-    private fun parseQuestion(json: JSONObject, number: Int): Question {
+    private fun parseQuestion(json: JSONObject, number: Int, id: String): Question {
         val where = "Question $number"
         val text = json.requireText("question", where)
         val answersJson = json.optJSONArray("answers")
@@ -46,7 +49,7 @@ object TopicParser {
             )
         }
         require(answers.any { it.correct }) { "$where needs at least one correct answer" }
-        return Question(text = text, answers = answers, explanation = json.optText("explanation"))
+        return Question(id = id, text = text, answers = answers, explanation = json.optText("explanation"))
     }
 
     private fun JSONObject.optText(key: String): String? =

@@ -35,3 +35,6 @@ local.properties
 *.apk
 captures/
 .cxx/
+
+# The Gradle wrapper jar must be committed (the *.jar rule above would exclude it)
+!gradle/wrapper/gradle-wrapper.jar
