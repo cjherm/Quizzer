@@ -1,0 +1,366 @@
+{
+  "title": "Android Automotive",
+  "description": "Android Automotive OS: Car APIs, CarService, UX restrictions, users, audio, power and system UI.",
+  "questions": [
+    {
+      "question": "What is the key difference between Android Automotive OS (AAOS) and Android Auto?",
+      "answers": [
+        {
+          "text": "AAOS runs directly on the vehicle's head unit; Android Auto projects apps from a phone",
+          "correct": true
+        },
+        {
+          "text": "Android Auto runs on the head unit; AAOS runs on the phone",
+          "correct": false
+        },
+        {
+          "text": "They are the same product with different names",
+          "correct": false
+        }
+      ],
+      "explanation": "AAOS is a full Android platform in the car. Android Auto renders phone apps on the car display."
+    },
+    {
+      "question": "Which API do apps use to read vehicle properties such as speed or gear?",
+      "answers": [
+        {
+          "text": "CarPropertyManager from android.car",
+          "correct": true
+        },
+        {
+          "text": "Direct AIDL calls to the VHAL",
+          "correct": false
+        },
+        {
+          "text": "SensorManager with TYPE_SPEED",
+          "correct": false
+        }
+      ],
+      "explanation": "Apps obtain Car via Car.createCar(context) and use CarPropertyManager. Only CarService talks to the VHAL."
+    },
+    {
+      "question": "Which permission is needed to read the vehicle speed via CarPropertyManager?",
+      "answers": [
+        {
+          "text": "android.car.permission.CAR_SPEED",
+          "correct": true
+        },
+        {
+          "text": "android.permission.ACCESS_FINE_LOCATION",
+          "correct": false
+        },
+        {
+          "text": "android.car.permission.CAR_POWERTRAIN",
+          "correct": false
+        }
+      ],
+      "explanation": "Each vehicle property is protected by a car permission. PERF_VEHICLE_SPEED requires CAR_SPEED."
+    },
+    {
+      "question": "What does CarUxRestrictionsManager provide?",
+      "answers": [
+        {
+          "text": "The current UX restrictions, e.g. limited text or no video while driving",
+          "correct": true
+        },
+        {
+          "text": "The list of apps the user may install",
+          "correct": false
+        },
+        {
+          "text": "The audio focus policy",
+          "correct": false
+        }
+      ],
+      "explanation": "UX restrictions are derived from the driving state; apps must adapt their UI to reduce distraction."
+    },
+    {
+      "question": "How does an activity declare that it may be shown while the car is moving?",
+      "answers": [
+        {
+          "text": "Meta-data 'distractionOptimized' = true in the manifest",
+          "correct": true
+        },
+        {
+          "text": "Permission android.car.permission.DRIVING",
+          "correct": false
+        },
+        {
+          "text": "Calling setDrivingMode(true) in onCreate()",
+          "correct": false
+        }
+      ],
+      "explanation": "Only distraction-optimized activities are allowed in restricted driving states; others are blocked."
+    },
+    {
+      "question": "What is the 'headless system user mode' in AAOS?",
+      "answers": [
+        {
+          "text": "User 0 runs in the background only; the driver uses a secondary user in the foreground",
+          "correct": true
+        },
+        {
+          "text": "The car boots without any display",
+          "correct": false
+        },
+        {
+          "text": "Apps run without a user context",
+          "correct": false
+        }
+      ],
+      "explanation": "Since Android 10, AAOS uses a headless system user so that multiple drivers/passengers can have own users."
+    },
+    {
+      "question": "How are third-party media apps integrated in AAOS?",
+      "answers": [
+        {
+          "text": "Via MediaBrowserService and MediaSession; the system media UI renders them",
+          "correct": true
+        },
+        {
+          "text": "Each app draws its own full-screen UI",
+          "correct": false
+        },
+        {
+          "text": "Through the VHAL",
+          "correct": false
+        }
+      ],
+      "explanation": "The car's media center browses the app's MediaBrowserService and controls playback via MediaSession."
+    },
+    {
+      "question": "Which mechanisms let OEMs customize the look of system apps without changing their code?",
+      "answers": [
+        {
+          "text": "Runtime Resource Overlays (RROs)",
+          "correct": true
+        },
+        {
+          "text": "car-ui-lib customization (resources/plugin)",
+          "correct": true
+        },
+        {
+          "text": "Patching the APK at runtime via the VHAL",
+          "correct": false
+        }
+      ],
+      "explanation": "RROs replace resources at runtime; car-ui-lib provides customizable UI components for consistency."
+    },
+    {
+      "question": "Which component provides the status bar and navigation bars (top, bottom, left, right) in AAOS?",
+      "answers": [
+        {
+          "text": "CarSystemUI",
+          "correct": true
+        },
+        {
+          "text": "CarLauncher",
+          "correct": false
+        },
+        {
+          "text": "CarService",
+          "correct": false
+        }
+      ],
+      "explanation": "CarSystemUI is the automotive variant of SystemUI and supports system bars on all four sides."
+    },
+    {
+      "question": "What is CarOccupantZoneManager used for?",
+      "answers": [
+        {
+          "text": "Mapping occupants (driver, passengers) to displays, users and audio zones",
+          "correct": true
+        },
+        {
+          "text": "Detecting seat occupancy sensors only",
+          "correct": false
+        },
+        {
+          "text": "Managing Bluetooth pairing",
+          "correct": false
+        }
+      ],
+      "explanation": "Occupant zones connect displays, users and audio zones, which is key for multi-display setups."
+    },
+    {
+      "question": "How is audio routing configured for audio zones in AAOS?",
+      "answers": [
+        {
+          "text": "car_audio_configuration.xml together with the audio policy configuration",
+          "correct": true
+        },
+        {
+          "text": "Each app selects the amplifier channel itself",
+          "correct": false
+        },
+        {
+          "text": "Through CarPropertyManager",
+          "correct": false
+        }
+      ],
+      "explanation": "Car audio zones group output devices (historically BUS devices) and map audio usages to volume groups."
+    },
+    {
+      "question": "What is Garage Mode?",
+      "answers": [
+        {
+          "text": "A phase after ignition off in which idle jobs (e.g. updates) can run before suspend",
+          "correct": true
+        },
+        {
+          "text": "A diagnostic mode for workshops",
+          "correct": false
+        },
+        {
+          "text": "A parking assistant UI",
+          "correct": false
+        }
+      ],
+      "explanation": "CarPowerManager enters Garage Mode during SHUTDOWN_PREPARE so JobScheduler idle jobs can run."
+    },
+    {
+      "question": "Which manager lets system components react to power state changes such as suspend?",
+      "answers": [
+        {
+          "text": "CarPowerManager",
+          "correct": true
+        },
+        {
+          "text": "PowerManager.WakeLock only",
+          "correct": false
+        },
+        {
+          "text": "CarUxRestrictionsManager",
+          "correct": false
+        }
+      ],
+      "explanation": "Listeners get states like SHUTDOWN_PREPARE, SUSPEND_ENTER and resume events."
+    },
+    {
+      "question": "What is EVS (Extended View System) for?",
+      "answers": [
+        {
+          "text": "Fast-starting camera views, e.g. rear-view camera, independent of the full Android stack",
+          "correct": true
+        },
+        {
+          "text": "Rendering 3D maps",
+          "correct": false
+        },
+        {
+          "text": "Voice assistant integration",
+          "correct": false
+        }
+      ],
+      "explanation": "EVS can show the rear camera early during boot, which is required by regulations in many markets."
+    },
+    {
+      "question": "What does Car Watchdog monitor?",
+      "answers": [
+        {
+          "text": "Health of critical processes and services",
+          "correct": true
+        },
+        {
+          "text": "Disk I/O overuse by apps and services",
+          "correct": true
+        },
+        {
+          "text": "The driver's attention via the camera",
+          "correct": false
+        }
+      ],
+      "explanation": "Car Watchdog kills unresponsive processes and can act on I/O overuse to protect flash memory."
+    },
+    {
+      "question": "You register a CarPropertyManager callback for an ON_CHANGE property with rate 10 Hz. What happens?",
+      "answers": [
+        {
+          "text": "The rate is ignored; events come when the value changes",
+          "correct": true
+        },
+        {
+          "text": "You get 10 events per second",
+          "correct": false
+        },
+        {
+          "text": "Registration fails",
+          "correct": false
+        }
+      ],
+      "explanation": "Sample rates only apply to CONTINUOUS properties, within their min/max sample rate."
+    },
+    {
+      "question": "Which library is used to build templated third-party apps (e.g. navigation, POI, IoT) for cars?",
+      "answers": [
+        {
+          "text": "Car App Library (androidx.car.app)",
+          "correct": true
+        },
+        {
+          "text": "car-ui-lib",
+          "correct": false
+        },
+        {
+          "text": "Jetpack Compose for Cars",
+          "correct": false
+        }
+      ],
+      "explanation": "The Car App Library uses templates so the host can render safe UIs on Android Auto and AAOS."
+    },
+    {
+      "question": "Where are the IDs of standard vehicle properties defined for apps?",
+      "answers": [
+        {
+          "text": "android.car.VehiclePropertyIds",
+          "correct": true
+        },
+        {
+          "text": "android.provider.Settings.Car",
+          "correct": false
+        },
+        {
+          "text": "R.car.property",
+          "correct": false
+        }
+      ],
+      "explanation": "VehiclePropertyIds mirrors the VHAL property IDs, e.g. PERF_VEHICLE_SPEED, GEAR_SELECTION."
+    },
+    {
+      "question": "Which statements about CarService are correct?",
+      "answers": [
+        {
+          "text": "It is the bridge between car APIs used by apps and the Vehicle HAL",
+          "correct": true
+        },
+        {
+          "text": "It enforces car permissions for vehicle properties",
+          "correct": true
+        },
+        {
+          "text": "It is a library linked into every app process",
+          "correct": false
+        }
+      ],
+      "explanation": "CarService runs in its own process; apps talk to it via Binder through the android.car APIs."
+    },
+    {
+      "question": "What does the Car API method Car.createCar(context) return?",
+      "answers": [
+        {
+          "text": "A Car object used to obtain car managers via getCarManager()",
+          "correct": true
+        },
+        {
+          "text": "A direct VHAL proxy",
+          "correct": false
+        },
+        {
+          "text": "A list of vehicle properties",
+          "correct": false
+        }
+      ],
+      "explanation": "From the Car object you get managers like CarPropertyManager, CarAudioManager, CarPowerManager."
+    }
+  ]
+}

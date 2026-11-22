@@ -1,0 +1,398 @@
+{
+  "title": "SAFe",
+  "description": "Scaled Agile Framework (SAFe 6.0): ARTs, PI Planning, WSJF, roles and events.",
+  "questions": [
+    {
+      "question": "Which of these are SAFe 6.0 core values?",
+      "answers": [
+        {
+          "text": "Alignment",
+          "correct": true
+        },
+        {
+          "text": "Transparency",
+          "correct": true
+        },
+        {
+          "text": "Relentless improvement",
+          "correct": true
+        },
+        {
+          "text": "Velocity maximization",
+          "correct": false
+        }
+      ],
+      "explanation": "SAFe 6.0 core values: Alignment, Transparency, Respect for people, Relentless improvement."
+    },
+    {
+      "question": "What is the recommended size of an Agile Release Train (ART)?",
+      "answers": [
+        {
+          "text": "About 50–125 people",
+          "correct": true
+        },
+        {
+          "text": "5–11 people",
+          "correct": false
+        },
+        {
+          "text": "200–500 people",
+          "correct": false
+        }
+      ],
+      "explanation": "Dunbar's number motivates the upper limit of ~125. Larger efforts use multiple ARTs (Large Solution)."
+    },
+    {
+      "question": "What does 'PI' stand for in SAFe 6.0?",
+      "answers": [
+        {
+          "text": "Planning Interval",
+          "correct": true
+        },
+        {
+          "text": "Program Increment",
+          "correct": false
+        },
+        {
+          "text": "Product Iteration",
+          "correct": false
+        }
+      ],
+      "explanation": "SAFe 6.0 renamed 'Program Increment' to 'Planning Interval'. The abbreviation stayed PI."
+    },
+    {
+      "question": "How long is a typical PI?",
+      "answers": [
+        {
+          "text": "8–12 weeks, often 4 development iterations plus 1 IP iteration",
+          "correct": true
+        },
+        {
+          "text": "Exactly 2 weeks",
+          "correct": false
+        },
+        {
+          "text": "6 months",
+          "correct": false
+        }
+      ],
+      "explanation": "A common setup is 5 iterations of 2 weeks: 4 development iterations + 1 Innovation and Planning iteration."
+    },
+    {
+      "question": "What is the Innovation and Planning (IP) iteration used for?",
+      "answers": [
+        {
+          "text": "Innovation and hackathons",
+          "correct": true
+        },
+        {
+          "text": "Inspect & Adapt and PI Planning",
+          "correct": true
+        },
+        {
+          "text": "A buffer for unfinished work, so the PI can still be met",
+          "correct": true
+        },
+        {
+          "text": "Starting the next PI's features early",
+          "correct": false
+        }
+      ],
+      "explanation": "The IP iteration provides time for innovation, I&A, PI Planning, education and acts as an estimating buffer."
+    },
+    {
+      "question": "What is the role of the Release Train Engineer (RTE)?",
+      "answers": [
+        {
+          "text": "Servant leader and coach of the ART, facilitating ART events",
+          "correct": true
+        },
+        {
+          "text": "Lead developer who approves all merges",
+          "correct": false
+        },
+        {
+          "text": "Owner of the ART backlog and its prioritization",
+          "correct": false
+        }
+      ],
+      "explanation": "The RTE facilitates PI Planning, I&A and ART sync. Product Management owns the ART backlog."
+    },
+    {
+      "question": "What does ROAM stand for when handling PI risks?",
+      "answers": [
+        {
+          "text": "Resolved, Owned, Accepted, Mitigated",
+          "correct": true
+        },
+        {
+          "text": "Reviewed, Opened, Assigned, Measured",
+          "correct": false
+        },
+        {
+          "text": "Risk, Opportunity, Action, Milestone",
+          "correct": false
+        }
+      ],
+      "explanation": "During PI Planning, ART risks are ROAMed in front of the whole train."
+    },
+    {
+      "question": "How is Weighted Shortest Job First (WSJF) calculated?",
+      "answers": [
+        {
+          "text": "Cost of Delay divided by job size (duration)",
+          "correct": true
+        },
+        {
+          "text": "Business value multiplied by story points",
+          "correct": false
+        },
+        {
+          "text": "Job size divided by Cost of Delay",
+          "correct": false
+        }
+      ],
+      "explanation": "Cost of Delay = user-business value + time criticality + risk reduction/opportunity enablement."
+    },
+    {
+      "question": "Which components make up Cost of Delay in SAFe?",
+      "answers": [
+        {
+          "text": "User-business value",
+          "correct": true
+        },
+        {
+          "text": "Time criticality",
+          "correct": true
+        },
+        {
+          "text": "Risk reduction and/or opportunity enablement",
+          "correct": true
+        },
+        {
+          "text": "Team velocity",
+          "correct": false
+        }
+      ],
+      "explanation": "The three components are estimated relatively (modified Fibonacci) and summed."
+    },
+    {
+      "question": "Who assigns business value to the teams' PI objectives?",
+      "answers": [
+        {
+          "text": "Business Owners",
+          "correct": true
+        },
+        {
+          "text": "The Scrum Master / Team Coach",
+          "correct": false
+        },
+        {
+          "text": "The System Team",
+          "correct": false
+        }
+      ],
+      "explanation": "Business Owners assign value (typically 1–10) during PI Planning and rate the actual value at the end of the PI."
+    },
+    {
+      "question": "Which statements about uncommitted objectives are correct?",
+      "answers": [
+        {
+          "text": "They are planned and use team capacity",
+          "correct": true
+        },
+        {
+          "text": "They are not part of the team's commitment",
+          "correct": true
+        },
+        {
+          "text": "They don't count when calculating ART predictability",
+          "correct": true
+        },
+        {
+          "text": "They are hidden from Business Owners",
+          "correct": false
+        }
+      ],
+      "explanation": "Uncommitted objectives absorb uncertainty. Predictability is measured against committed objectives."
+    },
+    {
+      "question": "Which are typical outputs of PI Planning?",
+      "answers": [
+        {
+          "text": "Committed team and ART PI objectives",
+          "correct": true
+        },
+        {
+          "text": "ART planning board with features and dependencies",
+          "correct": true
+        },
+        {
+          "text": "A confidence vote",
+          "correct": true
+        },
+        {
+          "text": "Detailed task estimates for the whole PI",
+          "correct": false
+        }
+      ],
+      "explanation": "Teams plan stories for the iterations, but detailed task breakdown is not a PI Planning output."
+    },
+    {
+      "question": "What are the parts of an Inspect & Adapt event?",
+      "answers": [
+        {
+          "text": "PI system demo",
+          "correct": true
+        },
+        {
+          "text": "Quantitative and qualitative measurement",
+          "correct": true
+        },
+        {
+          "text": "Retrospective and problem-solving workshop",
+          "correct": true
+        },
+        {
+          "text": "Business Owner contract negotiation",
+          "correct": false
+        }
+      ],
+      "explanation": "I&A happens at the end of each PI, usually in the IP iteration."
+    },
+    {
+      "question": "Which enabler types does SAFe define?",
+      "answers": [
+        {
+          "text": "Exploration",
+          "correct": true
+        },
+        {
+          "text": "Architectural",
+          "correct": true
+        },
+        {
+          "text": "Infrastructure",
+          "correct": true
+        },
+        {
+          "text": "Marketing",
+          "correct": false
+        }
+      ],
+      "explanation": "The four enabler types are Exploration, Architectural, Infrastructure and Compliance."
+    },
+    {
+      "question": "What is the Architectural Runway?",
+      "answers": [
+        {
+          "text": "Existing code, components and infrastructure needed to implement near-term features without excessive redesign",
+          "correct": true
+        },
+        {
+          "text": "A long-term architecture document that must be approved before each PI",
+          "correct": false
+        },
+        {
+          "text": "The time between two releases",
+          "correct": false
+        }
+      ],
+      "explanation": "Enablers extend the runway; features consume it."
+    },
+    {
+      "question": "Which SAFe configurations exist?",
+      "answers": [
+        {
+          "text": "Essential",
+          "correct": true
+        },
+        {
+          "text": "Large Solution",
+          "correct": true
+        },
+        {
+          "text": "Portfolio",
+          "correct": true
+        },
+        {
+          "text": "Enterprise Light",
+          "correct": false
+        }
+      ],
+      "explanation": "The four configurations are Essential, Large Solution, Portfolio and Full."
+    },
+    {
+      "question": "Who typically owns and prioritizes features in the ART backlog?",
+      "answers": [
+        {
+          "text": "Product Management",
+          "correct": true
+        },
+        {
+          "text": "The Product Owner of each team",
+          "correct": false
+        },
+        {
+          "text": "The RTE",
+          "correct": false
+        }
+      ],
+      "explanation": "Product Management owns features (ART backlog); Product Owners own stories (team backlog)."
+    },
+    {
+      "question": "What is the target range for ART predictability?",
+      "answers": [
+        {
+          "text": "80–100 % of planned business value",
+          "correct": true
+        },
+        {
+          "text": "100 % exactly",
+          "correct": false
+        },
+        {
+          "text": "50–70 %",
+          "correct": false
+        }
+      ],
+      "explanation": "Predictability = actual business value / planned business value of committed objectives."
+    },
+    {
+      "question": "What does the System Team typically do?",
+      "answers": [
+        {
+          "text": "Builds and maintains the CI/CD and integration environment",
+          "correct": true
+        },
+        {
+          "text": "Supports the end-to-end system demo",
+          "correct": true
+        },
+        {
+          "text": "Approves all features before PI Planning",
+          "correct": false
+        }
+      ],
+      "explanation": "The System Team is a specialized agile team that helps integrate and demo the solution."
+    },
+    {
+      "question": "In which Portfolio Kanban state is a Lean business case created for an epic?",
+      "answers": [
+        {
+          "text": "Analyzing",
+          "correct": true
+        },
+        {
+          "text": "Funnel",
+          "correct": false
+        },
+        {
+          "text": "Done",
+          "correct": false
+        }
+      ],
+      "explanation": "Funnel → Reviewing → Analyzing (Lean business case, MVP) → Ready → Implementing → Done."
+    }
+  ]
+}

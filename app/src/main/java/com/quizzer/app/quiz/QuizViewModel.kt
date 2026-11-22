@@ -49,7 +49,7 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
     init {
         viewModelScope.launch {
             themes = themeRepository.loadAll()
-            topicRepository.seedSamplesIfNeeded()
+            topicRepository.importNewBundledTopics()
             stats = statsRepository.load()
             reloadTopics()
         }

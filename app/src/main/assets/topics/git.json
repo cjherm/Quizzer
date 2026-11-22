@@ -1,0 +1,370 @@
+{
+  "title": "Git",
+  "description": "History editing, recovery, branching, internals and the AOSP repo/Gerrit workflow.",
+  "questions": [
+    {
+      "question": "What does 'git reset --soft HEAD~1' do?",
+      "answers": [
+        {
+          "text": "Moves the branch back one commit and keeps the changes staged",
+          "correct": true
+        },
+        {
+          "text": "Deletes the last commit and all its changes",
+          "correct": false
+        },
+        {
+          "text": "Creates a new commit that undoes the last one",
+          "correct": false
+        }
+      ],
+      "explanation": "--soft keeps index and working tree; --mixed (default) unstages; --hard discards changes."
+    },
+    {
+      "question": "How do you undo a commit that has already been pushed to a shared branch?",
+      "answers": [
+        {
+          "text": "git revert <commit>",
+          "correct": true
+        },
+        {
+          "text": "git reset --hard <commit>~1 and force-push",
+          "correct": false
+        },
+        {
+          "text": "git checkout <commit>",
+          "correct": false
+        }
+      ],
+      "explanation": "revert adds a new commit and doesn't rewrite shared history."
+    },
+    {
+      "question": "You lost a commit after a bad rebase. What helps to find it again?",
+      "answers": [
+        {
+          "text": "git reflog",
+          "correct": true
+        },
+        {
+          "text": "git log --all only",
+          "correct": false
+        },
+        {
+          "text": "git fsck --full only",
+          "correct": false
+        }
+      ],
+      "explanation": "The reflog records where HEAD and branches pointed, typically for 90 days."
+    },
+    {
+      "question": "What does git bisect do?",
+      "answers": [
+        {
+          "text": "Binary search through history to find the commit that introduced a bug",
+          "correct": true
+        },
+        {
+          "text": "Splits a commit into two",
+          "correct": false
+        },
+        {
+          "text": "Divides a repository into submodules",
+          "correct": false
+        }
+      ],
+      "explanation": "Mark commits good/bad (or use 'git bisect run <script>') until the first bad commit is found."
+    },
+    {
+      "question": "What is the difference between HEAD~2 and HEAD^2?",
+      "answers": [
+        {
+          "text": "HEAD~2 is the grandparent; HEAD^2 is the second parent of a merge commit",
+          "correct": true
+        },
+        {
+          "text": "They are the same",
+          "correct": false
+        },
+        {
+          "text": "HEAD^2 is the grandparent; HEAD~2 the second parent",
+          "correct": false
+        }
+      ],
+      "explanation": "~ follows first parents; ^n selects the n-th parent."
+    },
+    {
+      "question": "What does 'detached HEAD' mean?",
+      "answers": [
+        {
+          "text": "HEAD points directly to a commit, not to a branch",
+          "correct": true
+        },
+        {
+          "text": "The remote branch was deleted",
+          "correct": false
+        },
+        {
+          "text": "The repository is corrupt",
+          "correct": false
+        }
+      ],
+      "explanation": "New commits there are only reachable via HEAD/reflog until you create a branch."
+    },
+    {
+      "question": "Which statements about rebase vs. merge are correct?",
+      "answers": [
+        {
+          "text": "Rebase rewrites commits and gives a linear history",
+          "correct": true
+        },
+        {
+          "text": "Merge keeps the original commits and adds a merge commit (unless fast-forward)",
+          "correct": true
+        },
+        {
+          "text": "Rebasing commits that others already use can cause trouble",
+          "correct": true
+        }
+      ],
+      "explanation": "Golden rule: don't rebase commits that exist outside your repository and that others build on."
+    },
+    {
+      "question": "Why use 'git push --force-with-lease' instead of '--force'?",
+      "answers": [
+        {
+          "text": "It refuses to overwrite remote commits you haven't seen",
+          "correct": true
+        },
+        {
+          "text": "It's faster",
+          "correct": false
+        },
+        {
+          "text": "It also pushes tags",
+          "correct": false
+        }
+      ],
+      "explanation": "It protects against overwriting a colleague's push made since your last fetch."
+    },
+    {
+      "question": "Which object types does Git store?",
+      "answers": [
+        {
+          "text": "blob",
+          "correct": true
+        },
+        {
+          "text": "tree",
+          "correct": true
+        },
+        {
+          "text": "commit",
+          "correct": true
+        },
+        {
+          "text": "diff",
+          "correct": false
+        }
+      ],
+      "explanation": "The fourth type is the annotated tag. Git stores snapshots, not diffs (packfiles use deltas internally)."
+    },
+    {
+      "question": "You added a file to .gitignore, but Git still tracks it. Why?",
+      "answers": [
+        {
+          "text": ".gitignore only affects untracked files; use 'git rm --cached <file>'",
+          "correct": true
+        },
+        {
+          "text": "The .gitignore must be committed first, then it works automatically",
+          "correct": false
+        },
+        {
+          "text": "Git caches .gitignore for 24 hours",
+          "correct": false
+        }
+      ],
+      "explanation": "Already tracked files stay tracked until removed from the index."
+    },
+    {
+      "question": "What is the difference between git fetch and git pull?",
+      "answers": [
+        {
+          "text": "fetch only downloads; pull fetches and then merges or rebases",
+          "correct": true
+        },
+        {
+          "text": "pull only downloads; fetch also merges",
+          "correct": false
+        },
+        {
+          "text": "They are the same",
+          "correct": false
+        }
+      ],
+      "explanation": "'git pull --rebase' (or pull.rebase=true) rebases local commits on top of the fetched branch."
+    },
+    {
+      "question": "How can you fix an older commit before pushing, keeping history clean?",
+      "answers": [
+        {
+          "text": "git commit --fixup <commit>, then git rebase -i --autosquash",
+          "correct": true
+        },
+        {
+          "text": "git commit --amend on the older commit directly",
+          "correct": false
+        },
+        {
+          "text": "git revert <commit>",
+          "correct": false
+        }
+      ],
+      "explanation": "--amend only changes the latest commit; fixup commits are squashed into their target automatically."
+    },
+    {
+      "question": "What does git cherry-pick do?",
+      "answers": [
+        {
+          "text": "Applies the changes of an existing commit as a new commit on the current branch",
+          "correct": true
+        },
+        {
+          "text": "Moves a commit to another branch and deletes it from the original",
+          "correct": false
+        },
+        {
+          "text": "Selects files for the next commit",
+          "correct": false
+        }
+      ],
+      "explanation": "Common for backporting fixes between release branches."
+    },
+    {
+      "question": "What does git worktree allow?",
+      "answers": [
+        {
+          "text": "Several working directories for the same repository, e.g. two branches at once",
+          "correct": true
+        },
+        {
+          "text": "Splitting a repository into two",
+          "correct": false
+        },
+        {
+          "text": "Showing the tree of commits",
+          "correct": false
+        }
+      ],
+      "explanation": "Handy for reviewing or building another branch without stashing your work."
+    },
+    {
+      "question": "What does git rerere do when enabled?",
+      "answers": [
+        {
+          "text": "Remembers conflict resolutions and reuses them when the same conflict appears again",
+          "correct": true
+        },
+        {
+          "text": "Retries failed pushes",
+          "correct": false
+        },
+        {
+          "text": "Re-runs hooks",
+          "correct": false
+        }
+      ],
+      "explanation": "'Reuse recorded resolution' helps with repeated rebases of long-lived branches."
+    },
+    {
+      "question": "In AOSP/Gerrit, how do you push a change for review?",
+      "answers": [
+        {
+          "text": "git push origin HEAD:refs/for/<branch>",
+          "correct": true
+        },
+        {
+          "text": "repo upload",
+          "correct": true
+        },
+        {
+          "text": "git push origin <branch> --review",
+          "correct": false
+        }
+      ],
+      "explanation": "Gerrit creates a change per commit; repo upload wraps this for multi-repo projects."
+    },
+    {
+      "question": "What is the Change-Id footer in Gerrit commits for?",
+      "answers": [
+        {
+          "text": "It identifies the change across new patch sets (amended commits)",
+          "correct": true
+        },
+        {
+          "text": "It is the SHA-1 of the commit",
+          "correct": false
+        },
+        {
+          "text": "It links the commit to a Jira ticket",
+          "correct": false
+        }
+      ],
+      "explanation": "A commit-msg hook adds it. Keep it when amending so Gerrit creates a new patch set."
+    },
+    {
+      "question": "Which repo command updates all projects of an AOSP checkout?",
+      "answers": [
+        {
+          "text": "repo sync",
+          "correct": true
+        },
+        {
+          "text": "repo pull",
+          "correct": false
+        },
+        {
+          "text": "git submodule update",
+          "correct": false
+        }
+      ],
+      "explanation": "Useful flags: -c (current branch only), -j (parallel jobs), --no-tags."
+    },
+    {
+      "question": "How do you find the commit that added or removed a specific string?",
+      "answers": [
+        {
+          "text": "git log -S \"text\"",
+          "correct": true
+        },
+        {
+          "text": "git blame -S \"text\"",
+          "correct": false
+        },
+        {
+          "text": "git grep --history \"text\"",
+          "correct": false
+        }
+      ],
+      "explanation": "The 'pickaxe' -S searches for changes in the number of occurrences; -G takes a regex."
+    },
+    {
+      "question": "What is the difference between 'git stash pop' and 'git stash apply'?",
+      "answers": [
+        {
+          "text": "pop applies the stash and removes it; apply keeps it in the stash list",
+          "correct": true
+        },
+        {
+          "text": "apply removes it; pop keeps it",
+          "correct": false
+        },
+        {
+          "text": "No difference",
+          "correct": false
+        }
+      ],
+      "explanation": "If pop hits a conflict, the stash entry is kept."
+    }
+  ]
+}

@@ -1,0 +1,382 @@
+{
+  "title": "Kotlin",
+  "description": "Language features, null safety, generics, coroutines and Flow.",
+  "questions": [
+    {
+      "question": "Which functions does a data class generate automatically?",
+      "answers": [
+        {
+          "text": "equals() / hashCode()",
+          "correct": true
+        },
+        {
+          "text": "toString()",
+          "correct": true
+        },
+        {
+          "text": "copy() and componentN()",
+          "correct": true
+        },
+        {
+          "text": "compareTo()",
+          "correct": false
+        }
+      ],
+      "explanation": "Only properties in the primary constructor are used by the generated functions."
+    },
+    {
+      "question": "Which scope function uses 'this' as receiver and returns the receiver object?",
+      "answers": [
+        {
+          "text": "apply",
+          "correct": true
+        },
+        {
+          "text": "let",
+          "correct": false
+        },
+        {
+          "text": "also",
+          "correct": false
+        },
+        {
+          "text": "run",
+          "correct": false
+        }
+      ],
+      "explanation": "apply: this → receiver. also: it → receiver. let: it → lambda result. run: this → lambda result."
+    },
+    {
+      "question": "Where can 'const val' be used?",
+      "answers": [
+        {
+          "text": "Top level or in an object/companion object, with primitive or String values",
+          "correct": true
+        },
+        {
+          "text": "For any val inside a class",
+          "correct": false
+        },
+        {
+          "text": "For values computed at runtime",
+          "correct": false
+        }
+      ],
+      "explanation": "const values are compile-time constants and are inlined at the call site."
+    },
+    {
+      "question": "Which statements about lateinit are correct?",
+      "answers": [
+        {
+          "text": "Only allowed on var properties",
+          "correct": true
+        },
+        {
+          "text": "Not allowed for primitive types like Int",
+          "correct": true
+        },
+        {
+          "text": "Accessing it before initialization throws UninitializedPropertyAccessException",
+          "correct": true
+        },
+        {
+          "text": "It makes the property nullable",
+          "correct": false
+        }
+      ],
+      "explanation": "Use ::prop.isInitialized to check. For primitives, use Delegates.notNull() instead."
+    },
+    {
+      "question": "What is the default thread-safety mode of 'by lazy { }'?",
+      "answers": [
+        {
+          "text": "SYNCHRONIZED",
+          "correct": true
+        },
+        {
+          "text": "NONE",
+          "correct": false
+        },
+        {
+          "text": "PUBLICATION",
+          "correct": false
+        }
+      ],
+      "explanation": "Use lazy(LazyThreadSafetyMode.NONE) when you know only one thread accesses it, e.g. UI code."
+    },
+    {
+      "question": "What makes 'when' over a sealed class useful?",
+      "answers": [
+        {
+          "text": "The compiler checks that all subclasses are handled when used as an expression",
+          "correct": true
+        },
+        {
+          "text": "It runs faster than if/else",
+          "correct": false
+        },
+        {
+          "text": "Sealed classes can be extended by any module",
+          "correct": false
+        }
+      ],
+      "explanation": "Subclasses of a sealed class must be in the same module and package, so the set is known at compile time."
+    },
+    {
+      "question": "What is the difference between == and === in Kotlin?",
+      "answers": [
+        {
+          "text": "== checks structural equality (equals); === checks reference identity",
+          "correct": true
+        },
+        {
+          "text": "== checks identity; === checks equals",
+          "correct": false
+        },
+        {
+          "text": "They are the same",
+          "correct": false
+        }
+      ],
+      "explanation": "a == b is translated to a?.equals(b) ?: (b === null)."
+    },
+    {
+      "question": "How are extension functions dispatched?",
+      "answers": [
+        {
+          "text": "Statically, based on the declared type of the receiver",
+          "correct": true
+        },
+        {
+          "text": "Virtually, based on the runtime type",
+          "correct": false
+        },
+        {
+          "text": "Via reflection at runtime",
+          "correct": false
+        }
+      ],
+      "explanation": "Extensions don't modify classes. A member function with the same signature always wins."
+    },
+    {
+      "question": "What does 'out' in 'interface Source<out T>' mean?",
+      "answers": [
+        {
+          "text": "T is covariant: Source<String> is a subtype of Source<Any>",
+          "correct": true
+        },
+        {
+          "text": "T is contravariant",
+          "correct": false
+        },
+        {
+          "text": "T can only be used as a parameter type",
+          "correct": false
+        }
+      ],
+      "explanation": "out = producer (T only returned). in = consumer (T only accepted), e.g. Comparator<in T>."
+    },
+    {
+      "question": "Why is 'reified' only allowed in inline functions?",
+      "answers": [
+        {
+          "text": "The type argument is substituted at the call site, so it's available at runtime",
+          "correct": true
+        },
+        {
+          "text": "Reified types are stored in the class file metadata",
+          "correct": false
+        },
+        {
+          "text": "It's a JVM limitation for lambdas",
+          "correct": false
+        }
+      ],
+      "explanation": "Normally generics are erased; inlining copies the body with the concrete type, e.g. for 'is T' checks."
+    },
+    {
+      "question": "What is the difference between launch and async?",
+      "answers": [
+        {
+          "text": "launch returns a Job; async returns a Deferred with a result",
+          "correct": true
+        },
+        {
+          "text": "async uncaught exceptions are thrown on await()",
+          "correct": true
+        },
+        {
+          "text": "launch blocks the current thread",
+          "correct": false
+        }
+      ],
+      "explanation": "Both start a coroutine in the given scope; neither blocks."
+    },
+    {
+      "question": "Which dispatcher is meant for blocking I/O such as file or network access?",
+      "answers": [
+        {
+          "text": "Dispatchers.IO",
+          "correct": true
+        },
+        {
+          "text": "Dispatchers.Default",
+          "correct": false
+        },
+        {
+          "text": "Dispatchers.Main",
+          "correct": false
+        },
+        {
+          "text": "Dispatchers.Unconfined",
+          "correct": false
+        }
+      ],
+      "explanation": "Default is for CPU-heavy work (threads = CPU cores); IO allows many more threads for blocking calls."
+    },
+    {
+      "question": "What does withContext(Dispatchers.IO) { ... } do?",
+      "answers": [
+        {
+          "text": "Runs the block on the IO dispatcher, suspends the caller and returns the block's result",
+          "correct": true
+        },
+        {
+          "text": "Starts a new coroutine and returns immediately",
+          "correct": false
+        },
+        {
+          "text": "Blocks the main thread until done",
+          "correct": false
+        }
+      ],
+      "explanation": "It's the standard way to make a suspending function main-safe."
+    },
+    {
+      "question": "Which statements about StateFlow are correct?",
+      "answers": [
+        {
+          "text": "It always has a value and needs an initial value",
+          "correct": true
+        },
+        {
+          "text": "New collectors immediately get the current value",
+          "correct": true
+        },
+        {
+          "text": "Equal consecutive values are not emitted again (conflation/distinctUntilChanged)",
+          "correct": true
+        },
+        {
+          "text": "It is a cold flow",
+          "correct": false
+        }
+      ],
+      "explanation": "StateFlow is a hot flow. For events without state, use SharedFlow or Channel."
+    },
+    {
+      "question": "A regular flow { ... } builder creates…",
+      "answers": [
+        {
+          "text": "a cold flow: the code runs anew for each collector",
+          "correct": true
+        },
+        {
+          "text": "a hot flow shared by all collectors",
+          "correct": false
+        },
+        {
+          "text": "a StateFlow",
+          "correct": false
+        }
+      ],
+      "explanation": "Use shareIn/stateIn to turn a cold flow into a hot one."
+    },
+    {
+      "question": "What does SupervisorJob change?",
+      "answers": [
+        {
+          "text": "A failing child doesn't cancel its siblings or the parent",
+          "correct": true
+        },
+        {
+          "text": "Children can't be cancelled at all",
+          "correct": false
+        },
+        {
+          "text": "Exceptions are ignored silently",
+          "correct": false
+        }
+      ],
+      "explanation": "viewModelScope and lifecycleScope use a SupervisorJob."
+    },
+    {
+      "question": "Why should you not swallow CancellationException in a catch-all block in a coroutine?",
+      "answers": [
+        {
+          "text": "It breaks cooperative cancellation: the coroutine keeps running although it was cancelled",
+          "correct": true
+        },
+        {
+          "text": "It crashes the app immediately",
+          "correct": false
+        },
+        {
+          "text": "It isn't possible to catch it",
+          "correct": false
+        }
+      ],
+      "explanation": "Rethrow CancellationException or use ensureActive() / catch more specific exceptions."
+    },
+    {
+      "question": "What does @JvmOverloads do?",
+      "answers": [
+        {
+          "text": "Generates Java overloads for functions with default parameters",
+          "correct": true
+        },
+        {
+          "text": "Makes a function static",
+          "correct": false
+        },
+        {
+          "text": "Allows operator overloading in Java",
+          "correct": false
+        }
+      ],
+      "explanation": "Useful for custom Views: constructors with (Context), (Context, AttributeSet), …"
+    },
+    {
+      "question": "What is a value class (@JvmInline value class)?",
+      "answers": [
+        {
+          "text": "A wrapper around one value that is usually represented by the underlying value at runtime",
+          "correct": true
+        },
+        {
+          "text": "A data class without methods",
+          "correct": false
+        },
+        {
+          "text": "A class that can only hold primitive values",
+          "correct": false
+        }
+      ],
+      "explanation": "Gives type safety (e.g. UserId vs. String) mostly without allocation overhead."
+    },
+    {
+      "question": "Does Kotlin have checked exceptions?",
+      "answers": [
+        {
+          "text": "No",
+          "correct": true
+        },
+        {
+          "text": "Yes, like Java",
+          "correct": false
+        }
+      ],
+      "explanation": "Use @Throws when Java callers need to know about exceptions."
+    }
+  ]
+}

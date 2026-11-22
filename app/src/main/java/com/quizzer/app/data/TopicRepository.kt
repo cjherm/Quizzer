@@ -12,27 +12,30 @@ import java.io.File
  * Stores topic files in the app's private storage as `files/topics/<topicId>.json`.
  * The file name is the topic ID, so an ID stays stable once assigned.
  *
- * On first launch the sample topics bundled in `assets/topics` are imported,
- * so they can be deleted like any other topic.
+ * Topics bundled in `assets/topics` are imported once per file, so they can be deleted like
+ * any other topic. Topics added to the app later are imported on the next launch; deleted ones
+ * don't come back.
  */
 class TopicRepository(private val context: Context) {
 
     private val topicsDir = File(context.filesDir, "topics")
     private val prefs = context.getSharedPreferences("quizzer", Context.MODE_PRIVATE)
 
-    suspend fun seedSamplesIfNeeded() = withContext(Dispatchers.IO) {
-        if (prefs.getBoolean(KEY_SAMPLES_SEEDED, false)) return@withContext
-        context.assets.list(ASSET_DIR).orEmpty()
-            .filter { it.endsWith(".json") }
-            .forEach { name ->
-                val text = context.assets.open("$ASSET_DIR/$name").use { it.bufferedReader().readText() }
-                try {
-                    importText(text)
-                } catch (e: IllegalArgumentException) {
-                    Log.e(TAG, "Bundled sample topic $name is invalid", e)
-                }
+    suspend fun importNewBundledTopics() = withContext(Dispatchers.IO) {
+        val imported = prefs.getStringSet(KEY_IMPORTED_ASSETS, emptySet()).orEmpty().toMutableSet()
+        val new = context.assets.list(ASSET_DIR).orEmpty()
+            .filter { it.endsWith(".json") && it !in imported }
+        if (new.isEmpty()) return@withContext
+        new.forEach { name ->
+            val text = context.assets.open("$ASSET_DIR/$name").use { it.bufferedReader().readText() }
+            try {
+                importText(text)
+            } catch (e: IllegalArgumentException) {
+                Log.e(TAG, "Bundled topic $name is invalid", e)
             }
-        prefs.edit { putBoolean(KEY_SAMPLES_SEEDED, true) }
+            imported += name
+        }
+        prefs.edit { putStringSet(KEY_IMPORTED_ASSETS, imported) }
     }
 
     /** Loads all valid topics, sorted by title. Invalid files are skipped and logged. */
@@ -80,6 +83,6 @@ class TopicRepository(private val context: Context) {
     companion object {
         private const val TAG = "TopicRepository"
         private const val ASSET_DIR = "topics"
-        private const val KEY_SAMPLES_SEEDED = "samples_seeded"
+        private const val KEY_IMPORTED_ASSETS = "imported_topic_assets"
     }
 }

@@ -1,0 +1,390 @@
+{
+  "title": "VHAL",
+  "description": "Vehicle HAL: property IDs, change modes, areas, AIDL interface, subscription and debugging.",
+  "questions": [
+    {
+      "question": "Since which Android version is the AIDL Vehicle HAL interface available?",
+      "answers": [
+        {
+          "text": "Android 13",
+          "correct": true
+        },
+        {
+          "text": "Android 10",
+          "correct": false
+        },
+        {
+          "text": "Android 8",
+          "correct": false
+        }
+      ],
+      "explanation": "Before Android 13, the VHAL used HIDL (android.hardware.automotive.vehicle@2.0)."
+    },
+    {
+      "question": "Which parts are combined (bitwise OR) to form a vehicle property ID?",
+      "answers": [
+        {
+          "text": "Property group (SYSTEM or VENDOR)",
+          "correct": true
+        },
+        {
+          "text": "Area type (GLOBAL, SEAT, …)",
+          "correct": true
+        },
+        {
+          "text": "Value type (INT32, FLOAT, …)",
+          "correct": true
+        },
+        {
+          "text": "Change mode",
+          "correct": false
+        }
+      ],
+      "explanation": "ID = VehiclePropertyGroup | VehicleArea | VehiclePropertyType | unique 16-bit ID. Change mode is in the config."
+    },
+    {
+      "question": "Which change modes exist for vehicle properties?",
+      "answers": [
+        {
+          "text": "STATIC",
+          "correct": true
+        },
+        {
+          "text": "ON_CHANGE",
+          "correct": true
+        },
+        {
+          "text": "CONTINUOUS",
+          "correct": true
+        },
+        {
+          "text": "PERIODIC_EVENT",
+          "correct": false
+        }
+      ],
+      "explanation": "STATIC never changes (e.g. INFO_VIN), ON_CHANGE on value change, CONTINUOUS sampled at a rate."
+    },
+    {
+      "question": "What is the change mode of PERF_VEHICLE_SPEED?",
+      "answers": [
+        {
+          "text": "CONTINUOUS",
+          "correct": true
+        },
+        {
+          "text": "ON_CHANGE",
+          "correct": false
+        },
+        {
+          "text": "STATIC",
+          "correct": false
+        }
+      ],
+      "explanation": "Speed is sampled; subscribers set a rate between minSampleRate and maxSampleRate."
+    },
+    {
+      "question": "Which value marks a vendor-specific property ID?",
+      "answers": [
+        {
+          "text": "VehiclePropertyGroup.VENDOR (0x20000000)",
+          "correct": true
+        },
+        {
+          "text": "VehiclePropertyGroup.SYSTEM (0x10000000)",
+          "correct": false
+        },
+        {
+          "text": "Any ID above 0xFFFF",
+          "correct": false
+        }
+      ],
+      "explanation": "Vendor properties need their own permissions handling in CarService (vendor permissions)."
+    },
+    {
+      "question": "Which area types does the VHAL define?",
+      "answers": [
+        {
+          "text": "GLOBAL",
+          "correct": true
+        },
+        {
+          "text": "SEAT",
+          "correct": true
+        },
+        {
+          "text": "WINDOW",
+          "correct": true
+        },
+        {
+          "text": "ENGINE",
+          "correct": false
+        }
+      ],
+      "explanation": "Further types: MIRROR, DOOR, WHEEL (and VENDOR since Android 14)."
+    },
+    {
+      "question": "Which area type does HVAC_TEMPERATURE_SET typically use?",
+      "answers": [
+        {
+          "text": "SEAT",
+          "correct": true
+        },
+        {
+          "text": "GLOBAL",
+          "correct": false
+        },
+        {
+          "text": "WINDOW",
+          "correct": false
+        }
+      ],
+      "explanation": "Each areaId is a combination of VehicleAreaSeat flags describing the HVAC zone, e.g. ROW_1_LEFT."
+    },
+    {
+      "question": "Who communicates with the VHAL directly?",
+      "answers": [
+        {
+          "text": "CarService (car_service)",
+          "correct": true
+        },
+        {
+          "text": "Any app with the CAR_SPEED permission",
+          "correct": false
+        },
+        {
+          "text": "SurfaceFlinger",
+          "correct": false
+        }
+      ],
+      "explanation": "Apps use android.car APIs; CarService maps permissions and forwards requests to the VHAL."
+    },
+    {
+      "question": "In the AIDL VHAL, how is the result of setValues() reported?",
+      "answers": [
+        {
+          "text": "Asynchronously via IVehicleCallback.onSetValues with the request ID",
+          "correct": true
+        },
+        {
+          "text": "Synchronously as the return value",
+          "correct": false
+        },
+        {
+          "text": "Only via the next onPropertyEvent",
+          "correct": false
+        }
+      ],
+      "explanation": "onSetValues reports whether the request was accepted; the new value arrives later via onPropertyEvent."
+    },
+    {
+      "question": "Which fields are part of VehiclePropConfig?",
+      "answers": [
+        {
+          "text": "prop, access, changeMode",
+          "correct": true
+        },
+        {
+          "text": "areaConfigs and configArray",
+          "correct": true
+        },
+        {
+          "text": "minSampleRate / maxSampleRate",
+          "correct": true
+        },
+        {
+          "text": "requiredAppPermission",
+          "correct": false
+        }
+      ],
+      "explanation": "Permissions are mapped in CarService, not in the VHAL config."
+    },
+    {
+      "question": "Which values can VehiclePropValue.status have?",
+      "answers": [
+        {
+          "text": "AVAILABLE",
+          "correct": true
+        },
+        {
+          "text": "UNAVAILABLE",
+          "correct": true
+        },
+        {
+          "text": "ERROR",
+          "correct": true
+        },
+        {
+          "text": "PENDING",
+          "correct": false
+        }
+      ],
+      "explanation": "UNAVAILABLE e.g. when a feature is temporarily off; ERROR when reading failed."
+    },
+    {
+      "question": "Where is the AIDL reference VHAL with the emulated 'FakeVehicleHardware' located in AOSP?",
+      "answers": [
+        {
+          "text": "hardware/interfaces/automotive/vehicle/aidl/impl",
+          "correct": true
+        },
+        {
+          "text": "packages/services/Car/vhal",
+          "correct": false
+        },
+        {
+          "text": "frameworks/base/car",
+          "correct": false
+        }
+      ],
+      "explanation": "The default implementation emulates vehicle data and is used e.g. on the emulator and Cuttlefish."
+    },
+    {
+      "question": "How does the AIDL VHAL handle large payloads, e.g. many property configs?",
+      "answers": [
+        {
+          "text": "LargeParcelable, which can switch to shared memory",
+          "correct": true
+        },
+        {
+          "text": "It splits them into 64 KB HIDL messages",
+          "correct": false
+        },
+        {
+          "text": "Large payloads are not supported",
+          "correct": false
+        }
+      ],
+      "explanation": "This avoids Binder transaction size limits (about 1 MB per process buffer)."
+    },
+    {
+      "question": "How can you inspect the VHAL on a device?",
+      "answers": [
+        {
+          "text": "adb shell dumpsys android.hardware.automotive.vehicle.IVehicle/default",
+          "correct": true
+        },
+        {
+          "text": "adb shell dumpsys car_service",
+          "correct": true
+        },
+        {
+          "text": "adb shell lsvhal",
+          "correct": false
+        }
+      ],
+      "explanation": "dumpsys on the VHAL supports options like --list, --get and --set for debugging (implementation-dependent)."
+    },
+    {
+      "question": "What is the value type of GEAR_SELECTION?",
+      "answers": [
+        {
+          "text": "INT32",
+          "correct": true
+        },
+        {
+          "text": "STRING",
+          "correct": false
+        },
+        {
+          "text": "FLOAT",
+          "correct": false
+        }
+      ],
+      "explanation": "Values are VehicleGear constants such as GEAR_PARK, GEAR_DRIVE, GEAR_REVERSE."
+    },
+    {
+      "question": "Which access modes can a property have?",
+      "answers": [
+        {
+          "text": "READ",
+          "correct": true
+        },
+        {
+          "text": "WRITE",
+          "correct": true
+        },
+        {
+          "text": "READ_WRITE",
+          "correct": true
+        },
+        {
+          "text": "EXECUTE",
+          "correct": false
+        }
+      ],
+      "explanation": "Access can also differ per area in newer versions (areaConfig access)."
+    },
+    {
+      "question": "What does a subscriber need to provide for a CONTINUOUS property?",
+      "answers": [
+        {
+          "text": "A sample rate within the property's min/max sample rate",
+          "correct": true
+        },
+        {
+          "text": "Nothing; it gets every hardware update",
+          "correct": false
+        },
+        {
+          "text": "A polling thread",
+          "correct": false
+        }
+      ],
+      "explanation": "The VHAL then sends property events at about that rate."
+    },
+    {
+      "question": "Which property type allows several values of different types in one property?",
+      "answers": [
+        {
+          "text": "MIXED",
+          "correct": true
+        },
+        {
+          "text": "BYTES",
+          "correct": false
+        },
+        {
+          "text": "INT32_VEC",
+          "correct": false
+        }
+      ],
+      "explanation": "MIXED is common for vendor properties that pack ints, floats and strings together."
+    },
+    {
+      "question": "Which user-management properties let the VHAL take part in user switching?",
+      "answers": [
+        {
+          "text": "INITIAL_USER_INFO",
+          "correct": true
+        },
+        {
+          "text": "SWITCH_USER",
+          "correct": true
+        },
+        {
+          "text": "CURRENT_USER_ID",
+          "correct": false
+        }
+      ],
+      "explanation": "CarService asks the VHAL which user to boot into and informs it about switches (also CREATE_USER, REMOVE_USER)."
+    },
+    {
+      "question": "A set request was accepted, but the hardware applied a different value. What should the VHAL send?",
+      "answers": [
+        {
+          "text": "A property event with the actual value",
+          "correct": true
+        },
+        {
+          "text": "Nothing; the requested value is assumed",
+          "correct": false
+        },
+        {
+          "text": "An error for the set request",
+          "correct": false
+        }
+      ],
+      "explanation": "Clients must not assume the set value is applied; the current value comes via onPropertyEvent."
+    }
+  ]
+}

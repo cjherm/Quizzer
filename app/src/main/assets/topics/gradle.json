@@ -1,0 +1,378 @@
+{
+  "title": "Gradle",
+  "description": "Build lifecycle, dependency configurations, caching, version catalogs and Android variants.",
+  "questions": [
+    {
+      "question": "Which are the three phases of a Gradle build?",
+      "answers": [
+        {
+          "text": "Initialization, configuration, execution",
+          "correct": true
+        },
+        {
+          "text": "Compile, test, package",
+          "correct": false
+        },
+        {
+          "text": "Resolve, build, publish",
+          "correct": false
+        }
+      ],
+      "explanation": "Initialization finds projects (settings file), configuration builds the task graph, execution runs tasks."
+    },
+    {
+      "question": "In which phase is settings.gradle(.kts) evaluated?",
+      "answers": [
+        {
+          "text": "Initialization",
+          "correct": true
+        },
+        {
+          "text": "Configuration",
+          "correct": false
+        },
+        {
+          "text": "Execution",
+          "correct": false
+        }
+      ],
+      "explanation": "The settings file decides which projects take part in the build."
+    },
+    {
+      "question": "What is the difference between 'api' and 'implementation' (java-library plugin)?",
+      "answers": [
+        {
+          "text": "'api' dependencies leak to consumers' compile classpath; 'implementation' ones don't",
+          "correct": true
+        },
+        {
+          "text": "'implementation' is only for tests",
+          "correct": false
+        },
+        {
+          "text": "There is no difference",
+          "correct": false
+        }
+      ],
+      "explanation": "Prefer implementation: fewer recompilations and better encapsulation."
+    },
+    {
+      "question": "What does the configuration cache do?",
+      "answers": [
+        {
+          "text": "Caches the result of the configuration phase and reuses it",
+          "correct": true
+        },
+        {
+          "text": "Caches task outputs across machines",
+          "correct": false
+        },
+        {
+          "text": "Caches downloaded dependencies",
+          "correct": false
+        }
+      ],
+      "explanation": "The build cache stores task outputs; the configuration cache stores the configured task graph."
+    },
+    {
+      "question": "What does the build cache allow?",
+      "answers": [
+        {
+          "text": "Reusing task outputs from earlier builds, also from other machines (remote cache)",
+          "correct": true
+        },
+        {
+          "text": "Skipping dependency resolution entirely",
+          "correct": false
+        },
+        {
+          "text": "Running tasks in parallel",
+          "correct": false
+        }
+      ],
+      "explanation": "Cacheable tasks with declared inputs/outputs can be loaded from cache instead of executed."
+    },
+    {
+      "question": "Which files belong to the Gradle wrapper and should be committed?",
+      "answers": [
+        {
+          "text": "gradlew and gradlew.bat",
+          "correct": true
+        },
+        {
+          "text": "gradle/wrapper/gradle-wrapper.properties",
+          "correct": true
+        },
+        {
+          "text": "gradle/wrapper/gradle-wrapper.jar",
+          "correct": true
+        },
+        {
+          "text": "~/.gradle/caches",
+          "correct": false
+        }
+      ],
+      "explanation": "The wrapper pins the Gradle version (distributionUrl) so everybody builds with the same one."
+    },
+    {
+      "question": "Which sections can gradle/libs.versions.toml contain?",
+      "answers": [
+        {
+          "text": "[versions]",
+          "correct": true
+        },
+        {
+          "text": "[libraries]",
+          "correct": true
+        },
+        {
+          "text": "[plugins]",
+          "correct": true
+        },
+        {
+          "text": "[tasks]",
+          "correct": false
+        }
+      ],
+      "explanation": "There is also [bundles] for groups of libraries."
+    },
+    {
+      "question": "Why prefer tasks.register(...) over tasks.create(...)?",
+      "answers": [
+        {
+          "text": "register is lazy: the task is only configured if it's needed",
+          "correct": true
+        },
+        {
+          "text": "create is deprecated in Kotlin only",
+          "correct": false
+        },
+        {
+          "text": "register runs the task immediately",
+          "correct": false
+        }
+      ],
+      "explanation": "Task configuration avoidance reduces configuration time in large builds."
+    },
+    {
+      "question": "How does Gradle resolve a version conflict between two transitive dependencies by default?",
+      "answers": [
+        {
+          "text": "It picks the highest version",
+          "correct": true
+        },
+        {
+          "text": "It picks the nearest one in the graph, like Maven",
+          "correct": false
+        },
+        {
+          "text": "It fails the build",
+          "correct": false
+        }
+      ],
+      "explanation": "Use constraints, platforms or resolutionStrategy to influence it; dependencyInsight explains the choice."
+    },
+    {
+      "question": "Which command shows why a specific dependency version was selected?",
+      "answers": [
+        {
+          "text": "./gradlew :app:dependencyInsight --dependency <name>",
+          "correct": true
+        },
+        {
+          "text": "./gradlew why <name>",
+          "correct": false
+        },
+        {
+          "text": "./gradlew tasks --all",
+          "correct": false
+        }
+      ],
+      "explanation": "Add --configuration (e.g. releaseRuntimeClasspath) to inspect a specific classpath."
+    },
+    {
+      "question": "What is a common way to share build logic between modules today?",
+      "answers": [
+        {
+          "text": "Convention plugins in an included build (e.g. build-logic)",
+          "correct": true
+        },
+        {
+          "text": "buildSrc also works, but invalidates more on change",
+          "correct": true
+        },
+        {
+          "text": "Copying build scripts into every module",
+          "correct": false
+        }
+      ],
+      "explanation": "Included builds via includeBuild() are preferred for large projects."
+    },
+    {
+      "question": "What are the benefits of the Provider API (Property<T>, Provider<T>)?",
+      "answers": [
+        {
+          "text": "Values are computed lazily, when needed",
+          "correct": true
+        },
+        {
+          "text": "Task dependencies can be inferred from wiring",
+          "correct": true
+        },
+        {
+          "text": "It makes builds run without the daemon",
+          "correct": false
+        }
+      ],
+      "explanation": "Wiring outputs of one task to inputs of another via providers adds the dependency automatically."
+    },
+    {
+      "question": "Android: how are build variants formed?",
+      "answers": [
+        {
+          "text": "Build types × product flavors (per flavor dimension)",
+          "correct": true
+        },
+        {
+          "text": "Only from build types",
+          "correct": false
+        },
+        {
+          "text": "From Git branches",
+          "correct": false
+        }
+      ],
+      "explanation": "Example: flavors 'free'/'paid' × build types 'debug'/'release' = 4 variants."
+    },
+    {
+      "question": "What is the difference between testImplementation and androidTestImplementation?",
+      "answers": [
+        {
+          "text": "testImplementation: local JVM unit tests; androidTestImplementation: instrumented tests on a device",
+          "correct": true
+        },
+        {
+          "text": "Both are for device tests",
+          "correct": false
+        },
+        {
+          "text": "androidTestImplementation is only for release builds",
+          "correct": false
+        }
+      ],
+      "explanation": "Local tests run in src/test; instrumented tests in src/androidTest."
+    },
+    {
+      "question": "Why is KSP usually preferred over kapt?",
+      "answers": [
+        {
+          "text": "It processes Kotlin directly without generating Java stubs, which is faster",
+          "correct": true
+        },
+        {
+          "text": "kapt doesn't work with Kotlin",
+          "correct": false
+        },
+        {
+          "text": "KSP runs at app runtime",
+          "correct": false
+        }
+      ],
+      "explanation": "kapt is in maintenance mode; Room, Moshi, Hilt and others support KSP."
+    },
+    {
+      "question": "What is the difference between dependsOn, mustRunAfter and finalizedBy?",
+      "answers": [
+        {
+          "text": "dependsOn: the other task is required and runs first",
+          "correct": true
+        },
+        {
+          "text": "mustRunAfter: only ordering if both are scheduled",
+          "correct": true
+        },
+        {
+          "text": "finalizedBy: the other task runs afterwards, even if this one fails",
+          "correct": true
+        }
+      ],
+      "explanation": "Only dependsOn adds a task to the graph; mustRunAfter only orders tasks that are already scheduled."
+    },
+    {
+      "question": "Which gradle.properties settings commonly speed up builds?",
+      "answers": [
+        {
+          "text": "org.gradle.caching=true",
+          "correct": true
+        },
+        {
+          "text": "org.gradle.parallel=true",
+          "correct": true
+        },
+        {
+          "text": "org.gradle.configuration-cache=true",
+          "correct": true
+        },
+        {
+          "text": "org.gradle.debug=true",
+          "correct": false
+        }
+      ],
+      "explanation": "org.gradle.debug makes the build wait for a debugger instead."
+    },
+    {
+      "question": "What decides if a task is UP-TO-DATE?",
+      "answers": [
+        {
+          "text": "Its declared inputs and outputs haven't changed since the last run",
+          "correct": true
+        },
+        {
+          "text": "The task ran less than 24 hours ago",
+          "correct": false
+        },
+        {
+          "text": "The Git commit is the same",
+          "correct": false
+        }
+      ],
+      "explanation": "Tasks without declared outputs are never up to date."
+    },
+    {
+      "question": "What does './gradlew build --scan' do?",
+      "answers": [
+        {
+          "text": "Publishes a Build Scan with timing, dependency and failure details",
+          "correct": true
+        },
+        {
+          "text": "Scans the code for security issues",
+          "correct": false
+        },
+        {
+          "text": "Lists all tasks",
+          "correct": false
+        }
+      ],
+      "explanation": "Build Scans help find slow tasks, cache misses and configuration time."
+    },
+    {
+      "question": "What is a composite build?",
+      "answers": [
+        {
+          "text": "A build that includes other complete builds via includeBuild()",
+          "correct": true
+        },
+        {
+          "text": "A build with more than one subproject",
+          "correct": false
+        },
+        {
+          "text": "A build that runs on several machines",
+          "correct": false
+        }
+      ],
+      "explanation": "Included builds can substitute binary dependencies with project sources, e.g. for a library you're changing."
+    }
+  ]
+}

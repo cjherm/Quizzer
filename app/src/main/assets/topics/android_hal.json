@@ -1,0 +1,378 @@
+{
+  "title": "Android HAL",
+  "description": "Treble, HIDL vs. AIDL HALs, VINTF, Binder domains, versioning and debugging.",
+  "questions": [
+    {
+      "question": "Which Android version introduced Project Treble?",
+      "answers": [
+        {
+          "text": "Android 8.0 (Oreo)",
+          "correct": true
+        },
+        {
+          "text": "Android 10",
+          "correct": false
+        },
+        {
+          "text": "Android 6.0",
+          "correct": false
+        }
+      ],
+      "explanation": "Treble separated the vendor implementation from the Android framework via stable HAL interfaces."
+    },
+    {
+      "question": "What is used for new HAL interfaces since Android 11?",
+      "answers": [
+        {
+          "text": "Stable AIDL",
+          "correct": true
+        },
+        {
+          "text": "HIDL",
+          "correct": false
+        },
+        {
+          "text": "Legacy hw_module_t HALs",
+          "correct": false
+        }
+      ],
+      "explanation": "HIDL is deprecated for new HALs; existing HIDL HALs are being migrated to AIDL."
+    },
+    {
+      "question": "Which statements about stable AIDL HALs are correct?",
+      "answers": [
+        {
+          "text": "The interface is declared with an aidl_interface module and stability \"vintf\"",
+          "correct": true
+        },
+        {
+          "text": "Released versions are frozen; their API dumps live in aidl_api/",
+          "correct": true
+        },
+        {
+          "text": "You may change method signatures in a frozen version",
+          "correct": false
+        }
+      ],
+      "explanation": "Changes go into a new version; you can add methods at the end and new fields to parcelables."
+    },
+    {
+      "question": "What do the VINTF device manifest and framework compatibility matrix describe?",
+      "answers": [
+        {
+          "text": "Which HALs the device provides and which HALs the framework requires",
+          "correct": true
+        },
+        {
+          "text": "The partition sizes",
+          "correct": false
+        },
+        {
+          "text": "SELinux rules",
+          "correct": false
+        }
+      ],
+      "explanation": "They are checked at build time and OTA time to ensure system and vendor images match."
+    },
+    {
+      "question": "Which service managers are used?",
+      "answers": [
+        {
+          "text": "servicemanager for AIDL services",
+          "correct": true
+        },
+        {
+          "text": "hwservicemanager for HIDL services",
+          "correct": true
+        },
+        {
+          "text": "vndservicemanager for vendor-to-vendor AIDL services",
+          "correct": true
+        },
+        {
+          "text": "halmanager for legacy HALs",
+          "correct": false
+        }
+      ],
+      "explanation": "They correspond to /dev/binder, /dev/hwbinder and /dev/vndbinder."
+    },
+    {
+      "question": "What is the difference between binderized and passthrough HIDL HALs?",
+      "answers": [
+        {
+          "text": "Binderized: own process, IPC via hwbinder; passthrough: loaded into the client process",
+          "correct": true
+        },
+        {
+          "text": "Passthrough HALs use sockets",
+          "correct": false
+        },
+        {
+          "text": "There is no difference",
+          "correct": false
+        }
+      ],
+      "explanation": "Passthrough mode was mainly a migration path for legacy HALs."
+    },
+    {
+      "question": "How were legacy (pre-Treble) HALs loaded?",
+      "answers": [
+        {
+          "text": "hw_get_module() loads a shared library, e.g. from /vendor/lib/hw, exposing hw_module_t",
+          "correct": true
+        },
+        {
+          "text": "Via Binder from servicemanager",
+          "correct": false
+        },
+        {
+          "text": "Through JNI only",
+          "correct": false
+        }
+      ],
+      "explanation": "Legacy HALs are C structs with function pointers in a .so."
+    },
+    {
+      "question": "Which AIDL backends exist?",
+      "answers": [
+        {
+          "text": "Java",
+          "correct": true
+        },
+        {
+          "text": "NDK (libbinder_ndk)",
+          "correct": true
+        },
+        {
+          "text": "Rust",
+          "correct": true
+        },
+        {
+          "text": "Python",
+          "correct": false
+        }
+      ],
+      "explanation": "There is also the C++ libbinder backend. For vendor HALs, the NDK backend is recommended."
+    },
+    {
+      "question": "What do you need to add for a new HAL service besides the code?",
+      "answers": [
+        {
+          "text": "An init .rc file to start the service",
+          "correct": true
+        },
+        {
+          "text": "SELinux policy (types, domains, service contexts)",
+          "correct": true
+        },
+        {
+          "text": "A VINTF manifest entry",
+          "correct": true
+        },
+        {
+          "text": "An entry in AndroidManifest.xml",
+          "correct": false
+        }
+      ],
+      "explanation": "Without SELinux policy and manifest entry, registration fails or the framework can't find the HAL."
+    },
+    {
+      "question": "What does a 'oneway' AIDL method mean?",
+      "answers": [
+        {
+          "text": "The call returns immediately without waiting for the result",
+          "correct": true
+        },
+        {
+          "text": "The method can only be called once",
+          "correct": false
+        },
+        {
+          "text": "Only one client may call it",
+          "correct": false
+        }
+      ],
+      "explanation": "oneway calls can't return values; they are queued per Binder object."
+    },
+    {
+      "question": "How can a client react when a HAL process dies?",
+      "answers": [
+        {
+          "text": "Register a death recipient via linkToDeath()",
+          "correct": true
+        },
+        {
+          "text": "Poll the service every second",
+          "correct": false
+        },
+        {
+          "text": "It isn't possible",
+          "correct": false
+        }
+      ],
+      "explanation": "After the death notification, the client re-fetches the service when it's back."
+    },
+    {
+      "question": "What are lazy HALs?",
+      "answers": [
+        {
+          "text": "HALs that start on demand and can exit when no clients are connected",
+          "correct": true
+        },
+        {
+          "text": "HALs written in Kotlin",
+          "correct": false
+        },
+        {
+          "text": "HALs loaded in passthrough mode",
+          "correct": false
+        }
+      ],
+      "explanation": "They save memory; AIDL lazy services use LazyServiceRegistrar and an init service that is not started at boot."
+    },
+    {
+      "question": "Which command lists registered AIDL services on a device?",
+      "answers": [
+        {
+          "text": "adb shell service list (or dumpsys -l)",
+          "correct": true
+        },
+        {
+          "text": "adb shell lshal",
+          "correct": false
+        },
+        {
+          "text": "adb shell pm list services",
+          "correct": false
+        }
+      ],
+      "explanation": "lshal lists HIDL HALs."
+    },
+    {
+      "question": "Which partition usually contains HAL implementations?",
+      "answers": [
+        {
+          "text": "/vendor (or /odm)",
+          "correct": true
+        },
+        {
+          "text": "/system",
+          "correct": false
+        },
+        {
+          "text": "/data",
+          "correct": false
+        }
+      ],
+      "explanation": "Keeping them on vendor/odm allows updating /system independently, e.g. with a GSI."
+    },
+    {
+      "question": "What is a GSI (Generic System Image)?",
+      "answers": [
+        {
+          "text": "A pure AOSP system image that boots on Treble-compliant devices",
+          "correct": true
+        },
+        {
+          "text": "A vendor image for all devices",
+          "correct": false
+        },
+        {
+          "text": "A Google Play system update",
+          "correct": false
+        }
+      ],
+      "explanation": "GSIs are used for VTS/CTS-on-GSI testing of the vendor interface."
+    },
+    {
+      "question": "How do you freeze a new version of an AIDL interface in AOSP?",
+      "answers": [
+        {
+          "text": "m <interface-name>-freeze-api",
+          "correct": true
+        },
+        {
+          "text": "Increase the version in Android.bp manually",
+          "correct": false
+        },
+        {
+          "text": "git tag the interface",
+          "correct": false
+        }
+      ],
+      "explanation": "This creates the next aidl_api/<name>/<version> dump; 'm <name>-update-api' updates the current dump."
+    },
+    {
+      "question": "A client built against version 1 talks to a version 2 HAL. What applies?",
+      "answers": [
+        {
+          "text": "Methods from version 1 keep working",
+          "correct": true
+        },
+        {
+          "text": "The client can check the remote version via getInterfaceVersion()",
+          "correct": true
+        },
+        {
+          "text": "The connection is refused",
+          "correct": false
+        }
+      ],
+      "explanation": "Calling a method the remote doesn't implement returns UNKNOWN_TRANSACTION, so check the version first."
+    },
+    {
+      "question": "Which test suite verifies that a vendor implementation follows the HAL interfaces?",
+      "answers": [
+        {
+          "text": "VTS (Vendor Test Suite)",
+          "correct": true
+        },
+        {
+          "text": "CTS only",
+          "correct": false
+        },
+        {
+          "text": "Robolectric",
+          "correct": false
+        }
+      ],
+      "explanation": "VTS tests HAL implementations and the kernel; CTS tests the app-facing API."
+    },
+    {
+      "question": "Why are HAL interfaces versioned and frozen?",
+      "answers": [
+        {
+          "text": "So that framework and vendor images can be updated independently",
+          "correct": true
+        },
+        {
+          "text": "To speed up Binder calls",
+          "correct": false
+        },
+        {
+          "text": "To reduce APK size",
+          "correct": false
+        }
+      ],
+      "explanation": "This is the core idea of Treble: a stable interface between framework and vendor."
+    },
+    {
+      "question": "What is the descriptor of an AIDL HAL instance typically like?",
+      "answers": [
+        {
+          "text": "<package>.<Interface>/<instance>, e.g. android.hardware.automotive.vehicle.IVehicle/default",
+          "correct": true
+        },
+        {
+          "text": "A file path like /dev/vehicle",
+          "correct": false
+        },
+        {
+          "text": "A numeric handle",
+          "correct": false
+        }
+      ],
+      "explanation": "The same name is listed in the VINTF manifest and used with AServiceManager_waitForService()."
+    }
+  ]
+}

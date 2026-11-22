@@ -82,12 +82,26 @@ See `docs/PLAN.md` for the plan and what's still open.
 
 ## Topics in the app
 
-- Three demo topics (`app/src/main/assets/topics/`) are installed on first launch.
+Nine topics with 20 questions each are built in (`app/src/main/assets/topics/`), aimed at
+Android Automotive HMI developers:
+
+| Topic | Covers |
+|---|---|
+| ASPICE | Capability levels, ratings, VDA scope, SWE/SUP processes, changes in 4.0 |
+| SAFe | ARTs, PI Planning, WSJF, roles, events, enablers (SAFe 6.0) |
+| Android Automotive | Car APIs, CarService, UX restrictions, users, audio, power, system UI |
+| Soong Build System | Android.bp, module types, lunch/m, Kati and Ninja |
+| Gradle | Build phases, configurations, caching, version catalogs, Android variants |
+| Git | History editing, recovery, internals, repo/Gerrit workflow |
+| Kotlin | Language features, generics, coroutines and Flow |
+| VHAL | Property IDs, change modes, areas, AIDL interface, debugging |
+| Android HAL | Treble, HIDL vs. AIDL, VINTF, versioning, Binder |
+
+- Bundled topics are imported once; new ones added in later app versions appear automatically,
+  deleted ones don't come back.
 - **Import topic** opens the system file picker; the file is validated and copied into the app.
 - Topics can be deleted from the topic list; this also deletes their statistics.
 - Wins / games per topic are shown in the topic list.
-- `sample-topics/` contains an extra file for testing the import, e.g.:
-  `adb push sample-topics/kotlin_basics_demo.json /sdcard/Download/`
 
 ## Themes
 

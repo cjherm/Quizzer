@@ -1,0 +1,394 @@
+{
+  "title": "ASPICE",
+  "description": "Automotive SPICE: process reference and assessment model, capability levels, VDA scope.",
+  "questions": [
+    {
+      "question": "Who publishes Automotive SPICE?",
+      "answers": [
+        {
+          "text": "VDA QMC (Quality Management Center of the German automotive industry association)",
+          "correct": true
+        },
+        {
+          "text": "ISO, as part of ISO 26262",
+          "correct": false
+        },
+        {
+          "text": "The AUTOSAR consortium",
+          "correct": false
+        }
+      ],
+      "explanation": "Automotive SPICE is owned and published by the VDA QMC. ISO 26262 is functional safety, a separate standard."
+    },
+    {
+      "question": "Which measurement framework does Automotive SPICE 3.1 use for rating process capability?",
+      "answers": [
+        {
+          "text": "ISO/IEC 33020",
+          "correct": true
+        },
+        {
+          "text": "ISO 26262-6",
+          "correct": false
+        },
+        {
+          "text": "ISO/IEC 27001",
+          "correct": false
+        },
+        {
+          "text": "ISO 9001",
+          "correct": false
+        }
+      ],
+      "explanation": "ASPICE 3.1 is conformant with ISO/IEC 33004 and uses the measurement framework of ISO/IEC 33020 (predecessor: ISO/IEC 15504)."
+    },
+    {
+      "question": "What is the name of capability level 3?",
+      "answers": [
+        {
+          "text": "Established",
+          "correct": true
+        },
+        {
+          "text": "Managed",
+          "correct": false
+        },
+        {
+          "text": "Predictable",
+          "correct": false
+        },
+        {
+          "text": "Optimizing",
+          "correct": false
+        }
+      ],
+      "explanation": "Levels: 0 Incomplete, 1 Performed, 2 Managed, 3 Established, 4 Predictable, 5 Innovating. 'Optimizing' is CMMI wording."
+    },
+    {
+      "question": "Which percentage range corresponds to the rating 'Largely achieved' (L)?",
+      "answers": [
+        {
+          "text": "> 50 % up to 85 %",
+          "correct": true
+        },
+        {
+          "text": "> 15 % up to 50 %",
+          "correct": false
+        },
+        {
+          "text": "> 85 % up to 100 %",
+          "correct": false
+        },
+        {
+          "text": "> 70 % up to 90 %",
+          "correct": false
+        }
+      ],
+      "explanation": "N: 0–15 %, P: >15–50 %, L: >50–85 %, F: >85–100 %."
+    },
+    {
+      "question": "Which ratings are required for a process to reach capability level 2?",
+      "answers": [
+        {
+          "text": "PA 1.1 rated Fully achieved",
+          "correct": true
+        },
+        {
+          "text": "PA 2.1 and PA 2.2 rated at least Largely achieved",
+          "correct": true
+        },
+        {
+          "text": "PA 3.1 rated at least Partially achieved",
+          "correct": false
+        }
+      ],
+      "explanation": "A level is reached if its own attributes are at least L and all lower-level attributes are F."
+    },
+    {
+      "question": "Which processes belong to the VDA scope (formerly HIS scope) in ASPICE 3.1?",
+      "answers": [
+        {
+          "text": "MAN.3 Project Management",
+          "correct": true
+        },
+        {
+          "text": "SUP.8 Configuration Management",
+          "correct": true
+        },
+        {
+          "text": "SWE.4 Software Unit Verification",
+          "correct": true
+        },
+        {
+          "text": "SPL.2 Product Release",
+          "correct": false
+        }
+      ],
+      "explanation": "VDA scope 3.1: ACQ.4, MAN.3, SUP.1, SUP.8, SUP.9, SUP.10, SYS.2–SYS.5, SWE.1–SWE.6. SPL.2 is not part of it."
+    },
+    {
+      "question": "In ASPICE 3.1, which process verifies the software requirements defined in SWE.1?",
+      "answers": [
+        {
+          "text": "SWE.6 Software Qualification Test",
+          "correct": true
+        },
+        {
+          "text": "SWE.4 Software Unit Verification",
+          "correct": false
+        },
+        {
+          "text": "SWE.5 Software Integration and Integration Test",
+          "correct": false
+        },
+        {
+          "text": "SYS.5 System Qualification Test",
+          "correct": false
+        }
+      ],
+      "explanation": "V-model pairs: SWE.1↔SWE.6, SWE.2↔SWE.5, SWE.3↔SWE.4."
+    },
+    {
+      "question": "Which activities belong to SWE.4 Software Unit Verification (ASPICE 3.1)?",
+      "answers": [
+        {
+          "text": "Static verification of software units, e.g. static analysis or code review",
+          "correct": true
+        },
+        {
+          "text": "Testing software units against unit verification criteria",
+          "correct": true
+        },
+        {
+          "text": "Testing the integrated software against software requirements",
+          "correct": false
+        }
+      ],
+      "explanation": "SWE.4 covers static and dynamic verification of units. Testing against SW requirements is SWE.6."
+    },
+    {
+      "question": "ASPICE 3.1 distinguishes traceability and consistency. What does consistency add?",
+      "answers": [
+        {
+          "text": "That linked elements actually match in content, not only that a link exists",
+          "correct": true
+        },
+        {
+          "text": "Nothing; both terms mean the same",
+          "correct": false
+        },
+        {
+          "text": "That every requirement has exactly one test case",
+          "correct": false
+        }
+      ],
+      "explanation": "Traceability = links exist (bidirectionally). Consistency = the linked items agree in content and are complete."
+    },
+    {
+      "question": "Which process is responsible for baselines and controlled storage of work products?",
+      "answers": [
+        {
+          "text": "SUP.8 Configuration Management",
+          "correct": true
+        },
+        {
+          "text": "SUP.10 Change Request Management",
+          "correct": false
+        },
+        {
+          "text": "SUP.9 Problem Resolution Management",
+          "correct": false
+        },
+        {
+          "text": "SUP.1 Quality Assurance",
+          "correct": false
+        }
+      ],
+      "explanation": "SUP.8 identifies configuration items, manages branches and baselines and controls storage and release."
+    },
+    {
+      "question": "Which process attributes belong to capability level 2?",
+      "answers": [
+        {
+          "text": "PA 2.1 Performance management",
+          "correct": true
+        },
+        {
+          "text": "PA 2.2 Work product management",
+          "correct": true
+        },
+        {
+          "text": "PA 3.1 Process definition",
+          "correct": false
+        },
+        {
+          "text": "PA 3.2 Process deployment",
+          "correct": false
+        }
+      ],
+      "explanation": "CL2 = PA 2.1 + PA 2.2. CL3 = PA 3.1 Process definition + PA 3.2 Process deployment."
+    },
+    {
+      "question": "Base practices are indicators for which process attribute?",
+      "answers": [
+        {
+          "text": "PA 1.1 Process performance",
+          "correct": true
+        },
+        {
+          "text": "PA 2.1 Performance management",
+          "correct": false
+        },
+        {
+          "text": "PA 3.2 Process deployment",
+          "correct": false
+        }
+      ],
+      "explanation": "Base practices (and output work products) indicate PA 1.1. Generic practices indicate PA 2.1 and above."
+    },
+    {
+      "question": "Which process groups were newly introduced with Automotive SPICE 4.0?",
+      "answers": [
+        {
+          "text": "HWE – Hardware Engineering",
+          "correct": true
+        },
+        {
+          "text": "MLE – Machine Learning Engineering",
+          "correct": true
+        },
+        {
+          "text": "SEC – Cybersecurity Engineering",
+          "correct": false
+        }
+      ],
+      "explanation": "4.0 added HWE and MLE (and VAL.1 Validation). Cybersecurity stays in the separate 'Automotive SPICE for Cybersecurity' PAM."
+    },
+    {
+      "question": "What are 'work products' called in Automotive SPICE 4.0?",
+      "answers": [
+        {
+          "text": "Information items",
+          "correct": true
+        },
+        {
+          "text": "Artifacts",
+          "correct": false
+        },
+        {
+          "text": "Deliverables",
+          "correct": false
+        },
+        {
+          "text": "Evidence units",
+          "correct": false
+        }
+      ],
+      "explanation": "4.0 replaced 'work products' with 'information items' and reworked the indicators."
+    },
+    {
+      "question": "Which intacs assessor grades may lead an Automotive SPICE assessment?",
+      "answers": [
+        {
+          "text": "Competent Assessor",
+          "correct": true
+        },
+        {
+          "text": "Principal Assessor",
+          "correct": true
+        },
+        {
+          "text": "Provisional Assessor",
+          "correct": false
+        }
+      ],
+      "explanation": "Provisional assessors may only take part as co-assessors. Lead assessors must be at least Competent."
+    },
+    {
+      "question": "An ASPICE assessment certifies that the product (e.g. the ECU software) is defect-free.",
+      "answers": [
+        {
+          "text": "False",
+          "correct": true
+        },
+        {
+          "text": "True",
+          "correct": false
+        }
+      ],
+      "explanation": "ASPICE rates process capability of a project or organizational unit, not product quality or safety."
+    },
+    {
+      "question": "For what is a capability level determined in an assessment?",
+      "answers": [
+        {
+          "text": "For each assessed process individually",
+          "correct": true
+        },
+        {
+          "text": "Once for the whole organization",
+          "correct": false
+        },
+        {
+          "text": "Once for the whole project, as an average",
+          "correct": false
+        }
+      ],
+      "explanation": "Results are a capability profile: one level per process instance. There is no single 'project level'."
+    },
+    {
+      "question": "Which percentage range corresponds to the rating 'Partially achieved' (P)?",
+      "answers": [
+        {
+          "text": "> 15 % up to 50 %",
+          "correct": true
+        },
+        {
+          "text": "> 0 % up to 15 %",
+          "correct": false
+        },
+        {
+          "text": "> 50 % up to 85 %",
+          "correct": false
+        }
+      ],
+      "explanation": "P means some evidence of a systematic approach exists, but parts are unpredictable."
+    },
+    {
+      "question": "Which process handles requests to change already agreed requirements or work products?",
+      "answers": [
+        {
+          "text": "SUP.10 Change Request Management",
+          "correct": true
+        },
+        {
+          "text": "SUP.9 Problem Resolution Management",
+          "correct": false
+        },
+        {
+          "text": "MAN.3 Project Management",
+          "correct": false
+        }
+      ],
+      "explanation": "SUP.10 records, analyzes, approves and tracks change requests. SUP.9 handles problems (defects)."
+    },
+    {
+      "question": "Which statements about the 'Plug-in concept' of Automotive SPICE 3.1 are correct?",
+      "answers": [
+        {
+          "text": "System-level processes (SYS) can be combined with domain processes such as SWE, HWE or MEE",
+          "correct": true
+        },
+        {
+          "text": "It allows hardware and mechanical engineering to be assessed alongside software",
+          "correct": true
+        },
+        {
+          "text": "It replaces capability levels with maturity levels",
+          "correct": false
+        }
+      ],
+      "explanation": "The plug-in concept connects SYS processes with domain-specific engineering processes. Capability levels stay."
+    }
+  ]
+}

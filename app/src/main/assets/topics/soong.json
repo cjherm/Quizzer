@@ -1,0 +1,378 @@
+{
+  "title": "Soong Build System",
+  "description": "AOSP build: Android.bp, Blueprint, module types, lunch/m, Kati and Ninja.",
+  "questions": [
+    {
+      "question": "Which file does Soong read to define modules?",
+      "answers": [
+        {
+          "text": "Android.bp",
+          "correct": true
+        },
+        {
+          "text": "Android.mk",
+          "correct": false
+        },
+        {
+          "text": "BUILD.gn",
+          "correct": false
+        },
+        {
+          "text": "CMakeLists.txt",
+          "correct": false
+        }
+      ],
+      "explanation": "Android.bp files use the Blueprint syntax. Android.mk files are still handled by Kati."
+    },
+    {
+      "question": "What does Soong ultimately generate to execute the build?",
+      "answers": [
+        {
+          "text": "Ninja build files",
+          "correct": true
+        },
+        {
+          "text": "Makefiles that GNU make executes",
+          "correct": false
+        },
+        {
+          "text": "Gradle tasks",
+          "correct": false
+        }
+      ],
+      "explanation": "Soong (and Kati for .mk files) produce Ninja files; Ninja runs the actual build steps."
+    },
+    {
+      "question": "Which statements about Blueprint (Android.bp) syntax are correct?",
+      "answers": [
+        {
+          "text": "There are no if/else conditionals",
+          "correct": true
+        },
+        {
+          "text": "Variant-specific settings use nested properties such as arch, target or product_variables",
+          "correct": true
+        },
+        {
+          "text": "Arbitrary shell commands can be run while parsing the file",
+          "correct": false
+        }
+      ],
+      "explanation": "Blueprint is declarative on purpose. Complex logic belongs in Go (Soong plugins) or soong_config_module_type."
+    },
+    {
+      "question": "Which module type builds an APK?",
+      "answers": [
+        {
+          "text": "android_app",
+          "correct": true
+        },
+        {
+          "text": "java_library",
+          "correct": false
+        },
+        {
+          "text": "cc_binary",
+          "correct": false
+        },
+        {
+          "text": "android_library",
+          "correct": false
+        }
+      ],
+      "explanation": "android_library builds an AAR-like library with resources; java_library builds a jar; cc_binary a native executable."
+    },
+    {
+      "question": "How can several modules share common properties in Android.bp?",
+      "answers": [
+        {
+          "text": "A *_defaults module (e.g. cc_defaults) referenced via 'defaults: [...]'",
+          "correct": true
+        },
+        {
+          "text": "Copy-paste only; sharing isn't supported",
+          "correct": false
+        },
+        {
+          "text": "include \"common.bp\"",
+          "correct": false
+        }
+      ],
+      "explanation": "Defaults modules are merged into the referencing module; lists are appended, scalars overridden."
+    },
+    {
+      "question": "What do you need to set for a system app to use hidden platform APIs and run as privileged?",
+      "answers": [
+        {
+          "text": "platform_apis: true",
+          "correct": true
+        },
+        {
+          "text": "privileged: true",
+          "correct": true
+        },
+        {
+          "text": "certificate: \"platform\" (if it needs signature permissions)",
+          "correct": true
+        },
+        {
+          "text": "min_sdk_version: \"current\" only",
+          "correct": false
+        }
+      ],
+      "explanation": "privileged installs to priv-app; platform_apis compiles against the full platform; signature permissions need the platform certificate."
+    },
+    {
+      "question": "Which commands build modules from the current directory?",
+      "answers": [
+        {
+          "text": "mm",
+          "correct": true
+        },
+        {
+          "text": "mmm <dir> (for another directory)",
+          "correct": true
+        },
+        {
+          "text": "lunch",
+          "correct": false
+        }
+      ],
+      "explanation": "m builds targets from the top of the tree; mm the current dir; mmm given dirs. lunch only selects the target."
+    },
+    {
+      "question": "Which build variants can you select with lunch?",
+      "answers": [
+        {
+          "text": "user",
+          "correct": true
+        },
+        {
+          "text": "userdebug",
+          "correct": true
+        },
+        {
+          "text": "eng",
+          "correct": true
+        },
+        {
+          "text": "release-debug",
+          "correct": false
+        }
+      ],
+      "explanation": "user = production, userdebug = like user but with root/debuggability, eng = development defaults."
+    },
+    {
+      "question": "Which tools come with the AOSP tree for working with Android.bp files?",
+      "answers": [
+        {
+          "text": "bpfmt – formats Android.bp files",
+          "correct": true
+        },
+        {
+          "text": "androidmk – converts Android.mk to Android.bp",
+          "correct": true
+        },
+        {
+          "text": "bp2gradle – converts to Gradle",
+          "correct": false
+        }
+      ],
+      "explanation": "androidmk does a best-effort conversion; complex makefile logic needs manual work."
+    },
+    {
+      "question": "How can a module install into the vendor partition?",
+      "answers": [
+        {
+          "text": "vendor: true",
+          "correct": true
+        },
+        {
+          "text": "partition: \"vendor\" in PRODUCT_PACKAGES",
+          "correct": false
+        },
+        {
+          "text": "install_path: \"/vendor\" only",
+          "correct": false
+        }
+      ],
+      "explanation": "Similar flags: product_specific, system_ext_specific, device_specific (odm)."
+    },
+    {
+      "question": "Where does Soong put intermediate build outputs?",
+      "answers": [
+        {
+          "text": "out/soong/.intermediates/",
+          "correct": true
+        },
+        {
+          "text": "out/target/product/<device>/system/",
+          "correct": false
+        },
+        {
+          "text": "build/soong/tmp/",
+          "correct": false
+        }
+      ],
+      "explanation": "Installed files end up under out/target/product/<device>/; intermediates live in out/soong/.intermediates."
+    },
+    {
+      "question": "How is a module added to a product image?",
+      "answers": [
+        {
+          "text": "Listing it in PRODUCT_PACKAGES in the product makefile",
+          "correct": true
+        },
+        {
+          "text": "Any module defined in an Android.bp is installed automatically",
+          "correct": false
+        },
+        {
+          "text": "Adding it to the root Android.bp",
+          "correct": false
+        }
+      ],
+      "explanation": "Product configuration is still make-based; PRODUCT_PACKAGES selects what gets installed."
+    },
+    {
+      "question": "What does the 'required' property do?",
+      "answers": [
+        {
+          "text": "Installs the listed modules whenever this module is installed",
+          "correct": true
+        },
+        {
+          "text": "Adds the modules to the compile classpath",
+          "correct": false
+        },
+        {
+          "text": "Fails the build if they are missing in out/",
+          "correct": false
+        }
+      ],
+      "explanation": "'required' is about installation, not linking. Use static_libs/shared_libs/libs for dependencies."
+    },
+    {
+      "question": "Module names in Soong must be…",
+      "answers": [
+        {
+          "text": "unique across the tree, unless soong_namespace is used",
+          "correct": true
+        },
+        {
+          "text": "unique only within one directory",
+          "correct": false
+        },
+        {
+          "text": "prefixed with the directory name",
+          "correct": false
+        }
+      ],
+      "explanation": "soong_namespace allows the same module name in different namespaces, e.g. for different devices."
+    },
+    {
+      "question": "Which mechanism lets Android.bp react to product-specific configuration without conditionals?",
+      "answers": [
+        {
+          "text": "soong_config_module_type with soong config variables",
+          "correct": true
+        },
+        {
+          "text": "#ifdef in Android.bp",
+          "correct": false
+        },
+        {
+          "text": "Environment variables read with getenv()",
+          "correct": false
+        }
+      ],
+      "explanation": "Product makefiles set SOONG_CONFIG_* variables; a custom module type maps them to properties."
+    },
+    {
+      "question": "Which module type imports a prebuilt APK?",
+      "answers": [
+        {
+          "text": "android_app_import",
+          "correct": true
+        },
+        {
+          "text": "prebuilt_apk",
+          "correct": false
+        },
+        {
+          "text": "android_app with srcs: [\"*.apk\"]",
+          "correct": false
+        }
+      ],
+      "explanation": "android_app_import can keep or replace the signature (presigned / certificate)."
+    },
+    {
+      "question": "Are glob patterns like \"src/**/*.java\" supported in srcs?",
+      "answers": [
+        {
+          "text": "Yes",
+          "correct": true
+        },
+        {
+          "text": "No, every file must be listed",
+          "correct": false
+        }
+      ],
+      "explanation": "Globs are supported; Soong re-runs when the set of matching files changes."
+    },
+    {
+      "question": "What does the visibility property control?",
+      "answers": [
+        {
+          "text": "Which other modules/packages may depend on this module",
+          "correct": true
+        },
+        {
+          "text": "Whether the app is visible in the launcher",
+          "correct": false
+        },
+        {
+          "text": "Which partitions can read the files",
+          "correct": false
+        }
+      ],
+      "explanation": "Examples: [\"//visibility:public\"], [\"//visibility:private\"] or specific package paths."
+    },
+    {
+      "question": "In Android 14+, what format does the lunch target use?",
+      "answers": [
+        {
+          "text": "<product>-<release>-<variant>, e.g. aosp_cf_x86_64_phone-trunk_staging-userdebug",
+          "correct": true
+        },
+        {
+          "text": "<product>-<variant> only",
+          "correct": false
+        },
+        {
+          "text": "<device>:<api level>",
+          "correct": false
+        }
+      ],
+      "explanation": "The release configuration (e.g. trunk_staging) was added to support trunk-stable development."
+    },
+    {
+      "question": "Which statements about Kati are correct?",
+      "answers": [
+        {
+          "text": "It processes Android.mk files and product makefiles",
+          "correct": true
+        },
+        {
+          "text": "It outputs Ninja files that are combined with Soong's",
+          "correct": true
+        },
+        {
+          "text": "It replaced Soong in Android 12",
+          "correct": false
+        }
+      ],
+      "explanation": "Kati is a make clone that emits Ninja. Soong and Kati outputs are combined into one Ninja build."
+    }
+  ]
+}
