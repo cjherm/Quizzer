@@ -62,10 +62,8 @@ Next up!, Continue!, Carry on!, Weiter!, Weiter geht's!, Nächste!, Suivant !, E
 On continue !, ¡Siguiente!, ¡Adelante!, ¡Otra!, Avanti!, Prossima!, Próxima!, Verder!, Nästa!,
 Dalej!, Další!, Tovább!, Дальше!, Devam!, 次へ!, 다음!, Lanjut!
 
-## Result screen
+## Result screen ✅
 
-✅ Interim version: win/lose, score, score needed to win, short-game note, and the counts of
-correct / partially correct / wrong as plain rows. Still to do:
 
 - Pie chart (drawn with Compose Canvas) with three slices: correct (green), partially correct
   (orange), wrong (red); score `12 / 16` in the middle.
@@ -81,18 +79,24 @@ correct / partially correct / wrong as plain rows. Still to do:
 - A question's result is recorded when it is checked (so it counts even if the game is quit);
   a game counts as played only when it is finished.
 
-## Themes (idea – waiting for Claude Design)
+## Themes ✅
 
-- The user can switch the app's theme, and add/remove themes, similar to topics.
-- A theme is a **data file** (e.g. JSON) with design tokens: colors, gradients, fonts, text styles,
-  shape style (e.g. slant), spacing. The app has **one set of screens** that read these tokens.
-- "Compatible" = the file has all required tokens; validated on import like topic files.
-- Themes can change the look, but not the layout structure (e.g. a different screen arrangement
-  needs code). Possible small switches: header style, list row style.
-- Open: fonts – bundled set to choose from, or a theme package (zip) that includes font files.
+- Four themes from Claude Design, built in: Sunset Coast (default), Neon Night, Postcard, Pocket Phone.
+  Design handoff per theme (spec, theme JSON, 22 reference screens): `docs/design/themes/<id>/`.
+- The palette button on the topic list opens the theme picker; the choice is remembered.
+- A theme is a JSON file (schema v1) with colors, gradients, surfaces, shapes, text styles and decor.
+  All screens read these tokens; the layout is the same for every theme.
+- "Compatible" = the file has every token the app uses; validated on import with a message naming
+  the missing/invalid token. Imported themes can be deleted; built-in and current theme cannot.
+- Fonts shipped with the app (OFL): Anton, Inter, Shrikhand, Oswald (Cyrillic in Anton styles).
+  Japanese/Korean use the system font. Icons: Phosphor (MIT). Licenses in `app/src/main/assets/licenses/`.
+- Deviations from the handoff's "assumptions": win at 75 % (not 70 %), random button labels instead of
+  "Check answer" / "Next question", and "N correct needed to win" shown on a lost game.
+- Not done yet: answer-row crossfade/stagger animation, scrollbar in long questions, an in-app
+  licenses screen.
 
 ## Build order
 
 1. ✅ Game rules: IDs, 16 questions / short game, random labels, partial scoring, 75 % win rule.
-2. Result screen with pie chart + chosen design / theme system (waiting for Claude Design).
+2. ✅ Result screen with pie chart + theme system.
 3. ✅ Statistics: weighted question selection, wins/games in the topic list.

@@ -38,3 +38,6 @@ captures/
 
 # The Gradle wrapper jar must be committed (the *.jar rule above would exclude it)
 !gradle/wrapper/gradle-wrapper.jar
+
+# Design reference screenshots (kept locally, too large for the repo)
+docs/design/**/screens/

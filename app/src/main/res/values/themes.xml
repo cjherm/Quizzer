@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Quizzer" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Window theme only; the app's look comes from the selected Quizzer theme (assets/themes). -->
+    <style name="Theme.Quizzer" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
 </resources>

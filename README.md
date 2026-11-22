@@ -64,6 +64,13 @@ See `docs/PLAN.md` for the plan and what's still open.
 - `sample-topics/` contains an extra file for testing the import, e.g.:
   `adb push sample-topics/kotlin_basics_demo.json /sdcard/Download/`
 
+## Themes
+
+Tap the palette icon on the topic list to pick a theme. Four themes are built in
+(`app/src/main/assets/themes/`); more can be imported as theme JSON files (schema v1, documented in
+`docs/design/themes/sunset-coast/handoff.md`). A theme changes colors, fonts, shapes and backgrounds;
+the layout stays the same.
+
 ## Build & run
 
 ```
