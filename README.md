@@ -118,7 +118,8 @@ Requirements:
 - Android 8.0 (API 26) or newer on the device; built for Android 16 (API 36).
 - JDK 17 or newer to start Gradle. The build itself runs on JDK 21, which Gradle finds or downloads
   automatically.
-- Android SDK with platform 36, e.g. via Android Studio.
+- Android SDK platform 37.2 (compile SDK), e.g. via Android Studio; the Gradle build downloads it
+  automatically if the SDK licenses are accepted.
 
 **Android Studio:** open the project folder, wait for the Gradle sync, select your device and click
 **Run**.

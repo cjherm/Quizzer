@@ -3,6 +3,7 @@ package com.quizzer.app.appicon
 import android.content.ComponentName
 import android.content.Context
 import android.content.pm.PackageManager
+import androidx.core.content.edit
 import com.quizzer.app.R
 
 /** The selectable launcher icons. Each one is an activity-alias in AndroidManifest.xml. */
@@ -43,7 +44,7 @@ object AppIcons {
             ?: enabled(context)
 
     fun choose(context: Context, icon: AppIcon) {
-        prefs(context).edit().putString(KEY_CHOSEN, icon.name).apply()
+        prefs(context).edit { putString(KEY_CHOSEN, icon.name) }
     }
 
     /** Enables the chosen icon's launcher entry if it isn't already. Call when the app is in the background. */

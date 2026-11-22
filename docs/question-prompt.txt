@@ -1,0 +1,64 @@
+Prompt for generating Quizzer questions with Claude (e.g. in the Claude app).
+Copy everything below the line, replace the parts in [brackets] and send it.
+New topic (mode A): save the JSON as a .json file and add it in Quizzer with "Import topic".
+More questions (mode B): the new questions go at the END of the existing topic file.
+------------------------------------------------------------------------------------------
+
+You are helping me write quiz content for Quizzer, my Android quiz app
+(repo: https://github.com/cjherm/Quizzer).
+
+About me: I'm an experienced (almost senior) Android developer working on HMI in
+Android Automotive. I use Quizzer to test my knowledge, deepen it and learn new
+things. Questions should be at that level: practical, precise, "which of these is
+true in practice" rather than textbook definitions.
+
+TASK
+[Choose one and delete the other:]
+A) Create a NEW topic: "[topic title, e.g. Jetpack Compose]"
+   Focus areas: [e.g. recomposition, state, side effects, performance, testing]
+B) EXTEND the existing topic file:
+   https://raw.githubusercontent.com/cjherm/Quizzer/main/app/src/main/assets/topics/[file].json
+   Read it first. Add [number] new questions that don't repeat or overlap with
+   existing ones. Focus on: [areas or "gaps you see"].
+   Files: android_automotive, android_hal, aspice, git, gradle, kotlin, safe, soong, vhal
+
+Number of questions: [e.g. 20] (at least 16 for a new topic).
+
+FILE FORMAT (strict JSON, one file per topic)
+Look at an existing topic as reference first:
+https://raw.githubusercontent.com/cjherm/Quizzer/main/app/src/main/assets/topics/vhal.json
+All existing topics: https://github.com/cjherm/Quizzer/tree/main/app/src/main/assets/topics
+
+{
+  "title": "Topic title",
+  "description": "One-line summary shown in the topic list.",
+  "questions": [
+    {
+      "question": "Question text?",
+      "answers": [
+        { "text": "Answer A", "correct": true },
+        { "text": "Answer B", "correct": false }
+      ],
+      "explanation": "Why the correct answers are correct (1–2 sentences)."
+    }
+  ]
+}
+
+RULES
+- 2 to 4 answers per question; at least one correct. One, several or all may be correct.
+- Mix: about 2/3 with one correct answer, 1/3 with several (occasionally all).
+- Wrong answers must be plausible (typical misconceptions), not silly.
+- Answer texts within a question must be unique; keep answers short (max ~15 words).
+- Every question gets an "explanation" that also teaches something.
+- Only state facts you are confident about. Name the version where it matters
+  (e.g. "since Android 13", "in Gradle 8"). If something is version-dependent or
+  disputed, rephrase or leave it out.
+- No duplicate questions.
+- For mode B: output ONLY the new questions, as a JSON array I can append to the
+  END of the existing "questions" list. Never reorder, delete or insert in the
+  middle: the app stores learning history by question position.
+
+OUTPUT
+1. The JSON in one code block (complete file for mode A, array of new questions for mode B).
+   It must be valid JSON: double quotes, no comments, no trailing commas.
+2. Below it, a short list of questions where you were less than certain, so I can check them.

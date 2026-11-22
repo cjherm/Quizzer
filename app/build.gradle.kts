@@ -5,7 +5,10 @@ plugins {
 
 android {
     namespace = "com.quizzer.app"
-    compileSdk = 36
+    compileSdk {
+        // Android 17 with minor API level 2 (Compose 1.13 needs at least 37.1).
+        version = release(37) { minorApiLevel = 2 }
+    }
 
     defaultConfig {
         applicationId = "com.quizzer.app"
